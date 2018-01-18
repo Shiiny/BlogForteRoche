@@ -9,7 +9,7 @@ $post = $app->getModelClass('Post')->byCategory($_GET['id']);
 $listCategorie = $app->getModelClass('category')->all();
 ?>
 
-<h1><?= $categorie->getTitle(); ?></h1>
+<h1><?= $categorie->title; ?></h1>
 <div class="row">
 	<div class="col-sm-8">
 		<?php
@@ -28,7 +28,7 @@ $listCategorie = $app->getModelClass('category')->all();
 		<h3>Les catégories</h3>
 		<ul>
 			<?php foreach($listCategorie as $listCategories): ?>
-			<li><a href="<?= $listCategories->getUrl(); ?>"><?= $listCategories->getTitle(); ?></a></li>
+			<li><a href="<?= $listCategories->getUrl(); ?>"><?= $listCategories->title; ?></a></li>
 		<?php endforeach; ?>
 		</ul>
 	</div>

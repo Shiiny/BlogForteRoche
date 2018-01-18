@@ -15,12 +15,20 @@ class Post extends Manager {
 		return $this->requete("SELECT posts.id, posts.title, posts.content, posts.dateAdd, categories.title as category FROM posts LEFT JOIN categories ON category_id = categories.id ORDER BY posts.dateAdd DESC");
 	}
 
+	/**
+	 * Récupère tous les articles
+	 * @return array
+	 */
+	public function all() {
+		return $this->requete("SELECT * FROM {$this->table} ORDER BY posts.dateAdd DESC");
+	}
+
 	/**	
 	*	Récupère un article en liant la catégorie associée.
 	*	@param  int $id
 	*	@return entity\PostEntity
 	*/
-	public function find($id) {
+	public function findWithCategory($id) {
 		return $this->requete("SELECT posts.id, posts.title, posts.content, categories.title as category FROM posts LEFT JOIN categories ON category_id = categories.id WHERE posts.id = ?", [$id], true);
 	}
 

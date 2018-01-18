@@ -16,7 +16,7 @@
 		<h3>Les catégories</h3>
 		<ul>
 			<?php foreach(App::getInstance()->getModelClass('Category')->all() as $categories): ?>
-			<li><a href="<?= $categories->getUrl(); ?>"><?= $categories->getTitle(); ?></a></li>
+			<li><a href="<?= $categories->getUrl(); ?>"><?= $categories->title; ?></a></li>
 		<?php endforeach; ?>
 		</ul>
 	</div>

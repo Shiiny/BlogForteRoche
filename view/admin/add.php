@@ -1,24 +1,20 @@
 <?php
 $postTable = App::getInstance()->getModelClass('Post');
 if(!empty($_POST)) {
-	$result = $postTable->update($_GET['id'], [
+	$result = $postTable->create([
 		'title' => $_POST['title'],
 		'content' => $_POST['content'],
 		'category_id' => $_POST['category_id']
 	]);
 	if($result) {
-		?>
-		<div class="alert alert-success">L'article a bien été modifié !</div>
-		<?php
+		header('Location: admin.php?p=posts.edit&id=' .App::getInstance()->getDb()->lastInsertId());
 	}
 }
-$post = $postTable->find($_GET['id']);
-
 // Récupération des catégories
 $categories = App::getInstance()->getModelClass('category')->extract('id', 'title');
 //var_dump($categories);
 
-$form = new blog\BootstrapForm($post);
+$form = new blog\BootstrapForm($_POST);
 ?>
 
 <form method="post" action="">

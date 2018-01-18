@@ -26,11 +26,23 @@ ob_start();
 if($page === 'home') {
 	require ROOT . '/view/admin/index.php';
 }
-elseif($page === 'post.edit') {
+elseif($page === 'posts.edit') {
 	require ROOT . '/view/admin/edit.php';
 }
-elseif($page === 'post.single') {
-	require ROOT . '/view/admin/single.php';
+elseif($page === 'posts.add') {
+	require ROOT . '/view/admin/add.php';
+}
+elseif($page === 'posts.delete') {
+	require ROOT . '/view/admin/delete.php';
+}
+elseif($page === 'categories.edit') {
+	require ROOT . '/view/admin/categories/edit.php';
+}
+elseif($page === 'categories.add') {
+	require ROOT . '/view/admin/categories/add.php';
+}
+elseif($page === 'categories.delete') {
+	require ROOT . '/view/admin/categories/delete.php';
 }
 $content = ob_get_clean();
 require ROOT . '/view/template/default.php';

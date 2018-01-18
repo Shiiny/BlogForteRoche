@@ -54,4 +54,28 @@ class Manager {
 		$sql_field = implode(', ', $sql_fields);
 		return $this->requete("UPDATE {$this->table} SET $sql_field WHERE id = ?", $attributes, true);
 	}
+
+	public function create($fields) {
+		$sql_fields = [];
+		$attributes = [];
+		foreach ($fields as $key => $value) {
+			$sql_fields[] = "$key = ?";
+			$attributes[] = $value;
+		}
+		$sql_field = implode(', ', $sql_fields);
+		return $this->requete("INSERT INTO {$this->table} SET $sql_field", $attributes, true);
+	}
+
+	public function delete($id) {
+		return $this->requete("DELETE FROM {$this->table} WHERE id = ?", [$id], true);
+	}
+
+	public function extract($key, $value) {
+		$records = $this->all();
+		$result = [];
+		foreach ($records as $record) {
+			$result[$record->$key] = $record->$value;
+		}
+		return $result;
+	}
 }

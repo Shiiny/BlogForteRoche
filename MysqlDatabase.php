@@ -77,4 +77,12 @@ class MysqlDatabase{
 		}
 		return $data;
 	}
+
+	/**
+	 * Retourne l'id de la dernière insertion 
+	 * @return [int]
+	 */
+	public function lastInsertId() {
+		return $this->getPDO()->lastInsertId();
+	}
 }

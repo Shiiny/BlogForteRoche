@@ -1,7 +1,7 @@
 <?php
 
 $app = App::getInstance();
-$post = $app->getModelClass('Post')->find($_GET['id']);
+$post = $app->getModelClass('Post')->findWithCategory($_GET['id']);
 if ($post === false) {
 	$app->notFound();
 }
