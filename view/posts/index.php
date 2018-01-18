@@ -3,6 +3,7 @@
 	<div class="col-sm-8">
 		<?php
 		foreach($posts as $post): ?>
+		<?php// var_dump($posts); ?>
 		<h2><a href="<?= $post->getUrl(); ?>"><?= $post->title; ?></a></h2>
 		<p><em class="col-sm-6"><?= $post->category; ?></em><em class="col-sm-6" style="text-align: right"><?= $post->dateAdd; ?></em></p>
 

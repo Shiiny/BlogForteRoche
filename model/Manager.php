@@ -9,7 +9,10 @@ class Manager {
 	protected $table;
 	protected $db;
 
-	// Injection de dépendance de la Database
+	/**
+	 * [__construct dInjection de dépendance de la Database]
+	 * @param MysqlDatabase $db
+	 */
 	public function __construct(MysqlDatabase $db) {
 		$this->db = $db;
 		if(is_null($this->table)) {

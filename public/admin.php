@@ -15,12 +15,7 @@ else {
 	$page = 'home';
 }
 
-// Auth
-$app = App::getInstance();
-$auth = new DBAuth($app->getDb());
-if(!$auth->logged()) {
-	$app->forbidden();
-}
+
 
 ob_start();
 if($page === 'home') {
@@ -46,3 +41,20 @@ elseif($page === 'categories.delete') {
 }
 $content = ob_get_clean();
 require ROOT . '/view/template/default.php';
+
+if($page === 'home') {
+	$controler = new blog\controler\AdminControler();
+	$controler->index();
+}
+elseif($page === 'posts.single') {
+	$controler = new blog\controler\AdminControler();
+	$controler->single();
+}
+elseif($page === 'posts.category') {
+	$controler = new blog\controler\AdminControler();
+	$controler->categories();
+}
+elseif($page === 'login') {
+	$controler = new blog\controler\UsersControler();
+	$controler->login();
+}

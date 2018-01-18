@@ -53,16 +53,6 @@ class App {
 		return $this->db_instance;
 	}
 
-	public function notFound() {
-		header('HTTP/1.0 404 Not Found');
-		die('Page introuvable');;
-	}
-
-	public function forbidden() {
-		header('HTTP/1.0 403 Forbiden');
-		die('Acces interdit');
-	}
-
 	public function getTitle() {
 		return $this->title;
 	}

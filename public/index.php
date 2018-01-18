@@ -1,7 +1,6 @@
 <?php
 define('ROOT', dirname(__DIR__));
 
-
 require ROOT . '/App.php';
 
 App::load();
@@ -13,18 +12,32 @@ else {
 	$page = 'home';
 }
 
-ob_start();
+
 if($page === 'home') {
-	require ROOT . '/view/home.php';
+	$controler = new blog\controler\PostsControler();
+	$controler->index();
 }
 elseif($page === 'posts.single') {
-	require ROOT . '/view/single.php';
+	$controler = new blog\controler\PostsControler();
+	$controler->single();
 }
 elseif($page === 'posts.category') {
-	require ROOT . '/view/category.php';
+	$controler = new blog\controler\PostsControler();
+	$controler->categories();
 }
 elseif($page === 'login') {
-	require ROOT . '/view/users/login.php';
+	$controler = new blog\controler\UsersControler();
+	$controler->login();
 }
-$content = ob_get_clean();
-require ROOT . '/view/template/default.php';
+elseif($page === 'admin.index') {
+	$controler = new blog\controler\AdminControler();
+	$controler->index();
+}
+elseif($page === 'admin.posts.add') {
+	$controler = new blog\controler\AdminControler();
+	$controler->add();
+}
+elseif($page === 'admin.posts.edit') {
+	$controler = new blog\controler\AdminControler();
+	$controler->edit();
+}
