@@ -3,6 +3,4 @@
 	<?= $form->input('content', 'Contenu', ['type' => 'textarea']); ?>
 	<?= $form->select('category_id', 'Catégorie', $categories); ?>
 	<button class="btn btn-primary">Sauvegarder</button>
-
-
 </form>

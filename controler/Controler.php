@@ -22,7 +22,9 @@ class Controler {
 	}
 
 	protected function loadModel($model_name) {
+		//var_dump($model_name);
 		$this->$model_name = App::getInstance()->getModelClass($model_name);
+		//var_dump($this->$model_name);
 	}
 
 	protected function notFound() {

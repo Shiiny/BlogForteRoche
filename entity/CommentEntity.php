@@ -4,6 +4,6 @@ namespace blog\entity;
 
 use blog\entity\Entity;
 
-class UserEntity extends Entity {
+class CommentEntity extends Entity {
 	
 }

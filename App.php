@@ -11,18 +11,26 @@ class App {
 
 	public $title = 'Blog ForteRoche';
 
-	// Appel du fichier de config de la DB
+	/**
+	 * [__construct description] Appel du fichier de config pour la DB
+	 */
 	public function __construct() {
 		$this->settings = require ROOT . '/config/config.php';
 	}
 
+	/**
+	 * [load description] Charge la session et l'autoloader
+	 */
 	public static function load() {
 		session_start();
 		require ROOT . '/Autoloader.php';
 		Autoloader::register();
 	}
 
-	// Permet d'avoir toujour la même instance 
+	/**
+	 * [getInstance description] Permet d'avoir toujour la même instance d'App
+	 * @return [objet] App
+	 */
 	public static function getInstance() {
 		// Partie gérant le singleton
 		if (is_null(self::$_instance)) {
@@ -38,13 +46,20 @@ class App {
 		return $this->settings[$key];
 	}
 
-	// Methode permettant l'utilisation d'une factory pour les models
+	/**
+	 * [getModelClass description] Factory qui gère l'appel aux models
+	 * @param  [string] $classname
+	 * @return [objet] une instance de $classname
+	 */
 	public function getModelClass($classname) {
 		$class_name = '\\blog\\model\\' .ucfirst($classname);
 		return new $class_name($this->getDb());
 	}
 
-	// Factory faisant appel toujour à la même instance de Database
+	/**
+	 * [getDb description] Factory donnant toujour à la même instance de MysqlDatabase
+	 * @return [objet] toujour la même instance de MysqlDatabase
+	 */
 	public function getDb() {
 		$config = App::getInstance();
 		if (is_null($this->db_instance)) {

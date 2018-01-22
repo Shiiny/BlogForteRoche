@@ -10,7 +10,7 @@ class Manager {
 	protected $db;
 
 	/**
-	 * [__construct dInjection de dépendance de la Database]
+	 * [__construct description] Injection de dépendance de la Database
 	 * @param MysqlDatabase $db
 	 */
 	public function __construct(MysqlDatabase $db) {
@@ -20,7 +20,6 @@ class Manager {
 			$class_name = end($parts);
 			$this->table = strtolower($class_name). 's';
 		}
-		
 	}
 
 	public function getClassEntity() {

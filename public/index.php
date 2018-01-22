@@ -9,35 +9,21 @@ if(isset($_GET['p'])) {
 	$page = $_GET['p'];
 }
 else {
-	$page = 'home';
+	$page = 'posts.index';
 }
 
+$page = explode('.', $page);
+$action = $page[1];
 
-if($page === 'home') {
-	$controler = new blog\controler\PostsControler();
-	$controler->index();
-}
-elseif($page === 'posts.single') {
-	$controler = new blog\controler\PostsControler();
-	$controler->single();
-}
-elseif($page === 'posts.category') {
-	$controler = new blog\controler\PostsControler();
-	$controler->categories();
-}
-elseif($page === 'login') {
-	$controler = new blog\controler\UsersControler();
-	$controler->login();
-}
-elseif($page === 'admin.index') {
-	$controler = new blog\controler\AdminControler();
-	$controler->index();
-}
-elseif($page === 'admin.posts.add') {
-	$controler = new blog\controler\AdminControler();
-	$controler->add();
-}
-elseif($page === 'admin.posts.edit') {
-	$controler = new blog\controler\AdminControler();
-	$controler->edit();
-}
+//var_dump($page);
+	
+$controler = 'blog\controler\\' . ucfirst($page[0]) . 'Controler';
+
+if($page[0] === 'admin') {
+	$action = $page[2];
+} 
+/*else{
+	$controler = 'blog\controler\\' . ucfirst($page[0]) . 'Controler';
+}*/
+$controler = new $controler();
+$controler->$action();

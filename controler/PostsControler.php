@@ -4,6 +4,7 @@ namespace blog\controler;
 
 use \App;
 use blog\controler\Controler;
+use blog\html\BootstrapForm;
 
 class PostsControler extends Controler {
 
@@ -11,6 +12,7 @@ class PostsControler extends Controler {
 		parent::__construct();
 		$this->loadModel('post');
 		$this->loadModel('category');
+		$this->loadModel('comment');
 	}
 
 	public function index() {
@@ -19,7 +21,7 @@ class PostsControler extends Controler {
 		$this->render('posts.index', compact('posts', 'categories'));
 	}
 
-	public function categories() {
+	public function category() {
 		$categorie = $this->category->find($_GET['id']);
 		if($categorie === false) {
 			$this->notFound();
@@ -32,11 +34,14 @@ class PostsControler extends Controler {
 	public function single() {
 		$app = App::getInstance();
 		$post = $this->post->findWithCategory($_GET['id']);
+		$comments = $this->comment->byComment($_GET['id']);
+		//var_dump($comments);
 		if ($post === false) {
 			$this->notFound();
 		}
 
 		$app->title = $post->title;
-		$this->render('posts.single', compact('post', 'app'));
+		$form = new BootstrapForm($_POST);
+		$this->render('posts.single', compact('post', 'app', 'comments', 'form'));
 	}
 }
