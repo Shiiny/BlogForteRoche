@@ -13,16 +13,12 @@
     <!-- Le styles -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="../public/css/style.css" type="text/css">   
-  <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
+  
   </head>
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -35,8 +31,13 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.php?p=admin.posts.index">Admin</a></li>
-            <li><a href="index.php?p=users.login">Login</a></li>
+            <?php if(isset($_SESSION['auth'])): ?>
+              <li><a href="index.php?p=users.logout">Se déconnecter</a></li>
+              <li><a href="index.php?p=admin.posts.index">Admin</a></li>
+            <?php else: ?>
+            <li class="active"><a href="index.php?p=users.register">S'inscrire</a></li>  
+            <li><a href="index.php?p=users.login">Se connecter</a></li>
+            <?php endif; ?>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

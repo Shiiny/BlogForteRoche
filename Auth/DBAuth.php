@@ -2,7 +2,8 @@
 
 namespace blog\Auth;
 
-/*use blog\MysqlDatabase;
+use blog\MysqlDatabase;
+use \App;
 
 class DBAuth {
 	private $db;
@@ -11,12 +12,9 @@ class DBAuth {
 		$this->db = $db;
 	}
 
-	/*public function getUserId() {
-		if($this->logged()) {
-			return $_SESSION['auth'];
-		}
-		return false;
-	}*/
+	public function hashPassword($password) {
+		return password_hash($password, PASSWORD_BCRYPT);
+	}
 
 	/**
 	 * @param  [string] $username 
@@ -34,17 +32,17 @@ class DBAuth {
 			}
 		} 
 		return false;
+	}*/
+
+	public function register($username, $password, $email) {
+		$password = $this->hashPassword($password);
+		$token = App::str_random(60);
+
+		$this->db->prepare("INSERT INTO users SET username = ?, password = ?, email = ?, confirmation_token = ?", [$username, $password, $email, $token]);
+		$user_id = $this->db->lastInsertId();
+		/*$mail_msg = "Afin de valider votre compte merci de cliquer sur ce lien\n\nhttp://localhost/Gestion-membres/confirm.php?id=$user_id&token=$token";
+		mail($email, "Confirmation de votre compte", $mail_msg);*/
 	}
 
-	public function logged() {
-		return isset($_SESSION['auth']);
-	}
-
-	public function permission() {
-		var_dump($_SESSION);
-		if($_SESSION['perm'] == 1) {
-			return true;
-		}
-		return false;
-	}
-}*/
+	
+}
