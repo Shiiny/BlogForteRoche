@@ -5,18 +5,18 @@ require ROOT . '/App.php';
 
 App::load();
 
-if(isset($_GET['p'])) {
+if(isset($_GET['p']) && !empty($_GET['p'])) {
 	$page = $_GET['p'];
+	var_dump($page);
 }
 else {
 	$page = 'posts.index';
+	var_dump($page);
 }
 
 $page = explode('.', $page);
 $action = $page[1];
 
-//var_dump($page);
-	
 $controler = 'blog\controler\\' . ucfirst($page[0]) . 'Controler';
 
 if($page[0] === 'admin') {
@@ -25,5 +25,6 @@ if($page[0] === 'admin') {
 /*else{
 	$controler = 'blog\controler\\' . ucfirst($page[0]) . 'Controler';
 }*/
+var_dump($controler, $action);
 $controler = new $controler();
-$controler->$action();
+$controler->$action(App::getInstance());

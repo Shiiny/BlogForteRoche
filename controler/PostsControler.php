@@ -2,7 +2,6 @@
 
 namespace blog\controler;
 
-use \App;
 use blog\controler\Controler;
 use blog\html\BootstrapForm;
 
@@ -31,11 +30,9 @@ class PostsControler extends Controler {
 		$this->render('posts.category', compact('categorie', 'posts', 'listCategories'));
 	}
 
-	public function single() {
-		$app = App::getInstance();
+	public function single($app) {
 		$post = $this->post->findWithCategory($_GET['id']);
 		$comments = $this->comment->byComment($_GET['id']);
-		//var_dump($comments);
 		if ($post === false) {
 			$this->notFound();
 		}

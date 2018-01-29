@@ -12,7 +12,7 @@ class Post extends Manager {
 	*	@return array
 	*/
 	public function getList() {
-		return $this->requete("SELECT posts.id, posts.title, posts.content, posts.dateAdd, categories.title as category FROM posts LEFT JOIN categories ON category_id = categories.id ORDER BY posts.dateAdd DESC");
+		return $this->requete("SELECT posts.id, posts.title, posts.content, posts.dateAdd, categories.title as category FROM {$this->table} LEFT JOIN categories ON category_id = categories.id ORDER BY posts.dateAdd DESC");
 	}
 
 	/**
@@ -29,7 +29,7 @@ class Post extends Manager {
 	*	@return entity\PostEntity
 	*/
 	public function findWithCategory($id) {
-		return $this->requete("SELECT posts.id, posts.title, posts.content, categories.title as category FROM posts LEFT JOIN categories ON category_id = categories.id WHERE posts.id = ?", [$id], true);
+		return $this->requete("SELECT posts.id, posts.title, posts.content, categories.title as category FROM {$this->table} LEFT JOIN categories ON category_id = categories.id WHERE posts.id = ?", [$id], true);
 	}
 
 	/**	
@@ -38,6 +38,6 @@ class Post extends Manager {
 	*	@return array
 	*/
 	public function byCategory($category_id) {
-		return $this->requete("SELECT posts.id, posts.title, posts.content, categories.title as category FROM posts LEFT JOIN categories ON category_id = categories.id WHERE category_id = ? ORDER BY posts.dateAdd DESC", [$category_id]);
+		return $this->requete("SELECT posts.id, posts.title, posts.content, categories.title as category FROM {$this->table} LEFT JOIN categories ON category_id = categories.id WHERE category_id = ? ORDER BY posts.dateAdd DESC", [$category_id]);
 	}
 }

@@ -44,6 +44,13 @@
     </nav>
 
     <div class="container">
+      <?php if(App::getInstance()->getSession()->read('flash')): ?>
+        <?php foreach (App::getInstance()->getSession()->getFlashes() as $type => $msg): ?>
+          <div class="alert alert-<?= $type; ?>">
+            <?= $msg; ?>
+          </div>
+        <?php endforeach; ?>
+      <?php endif; ?>
 
       <?= $content; ?>
 

@@ -4,7 +4,7 @@ namespace blog\controler;
 
 use blog\controler\Controler;
 use \App;
-use blog\Auth\DBAuth;
+use blog\Auth\Auth;
 use blog\html\BootstrapForm;
 
 class UsersControler extends Controler {
@@ -26,31 +26,12 @@ class UsersControler extends Controler {
 	public function login() {
 		$errors = false;
 
-		if(!empty($_POST)) {
-		$membre = $this->user->byRang($_POST['username']);
-		var_dump($membre);
-			//$auth = new DBAuth(App::getInstance()->getDb());
-
-			$user = $this->user->login($_POST['username'], $_POST['password']);
-			var_dump($user);
-
-			if($user AND $membre->rang === "administrateur") {
-							var_dump($user);
-
-				header('Location: index.php?p=admin.posts.index');
-			}
-			elseif($user AND ($membre->rang === "membre")) {
-				header('Location: index.php');
-			}
-			else{
-				$errors = true;
-			}
-		}
+		
 		$form = new BootstrapForm($_POST);
 		$this->render('users.login', compact('form', 'errors'));
 	}
 
-	public function register() {
+	public function register($app) {
 		if(!empty($_POST)) {
 			
 			if(!preg_match('/^[a-zA-Z0-9_]+$/', $_POST['username']) || !isset($_POST['username'])) {
@@ -75,17 +56,32 @@ class UsersControler extends Controler {
 				$this->errors['password'] = "Vous devez rentrer un mot de passe valide";
 			}
 			if($this->isValid()) {
-				$auth = new DBAuth(App::getInstance()->getDb());
-				$auth->register($_POST['username'], $_POST['password'], $_POST['email']);
-				//Session::getInstance()->setFlash('success', "Un email de confirmation vous a été envoyé.");
-				//App::redirect('login.php');
+				$app->getAuth()->register($_POST['username'], $_POST['password'], $_POST['email']);
+				$app->getSession()->setFlash('success', "Un email de confirmation vous a été envoyé.");
+				$app->redirect('index.php?p=users.login');
 			}
 			else {
 				$errors = $this->getErrors();
 			}
-		var_dump($this->getErrors());
 		}
 		$form = new BootstrapForm($_POST);
 		$this->render('users.register', compact('form', 'errors'));
+	}
+
+	public function confirm($app) {
+		$user = $this->user->byUserId($_GET['id']);
+		var_dump($user);
+		var_dump($user->confirmation_token == $_GET['token']);
+		die();
+		if($user && $user->confirmation_token == $_GET['token']){
+			$this->user->validateAccount($_GET['id']);
+			$app->getSession()->setFlash('success', "Votre compte a bien été activé");
+			$app->getSession()->write('auth', $user);
+			$app->redirect('index.php?p=users.account');
+		}
+		else {
+			$app->getSession()->setFlash('success', "Votre compte a bien été activé");
+			$app->redirect('index.php?p=users.login');
+		}
 	}
 }

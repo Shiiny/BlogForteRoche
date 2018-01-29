@@ -2,7 +2,6 @@
 
 namespace blog\model;
 
-use blog\App;
 use blog\model\Manager;
 
 class Comment extends Manager{

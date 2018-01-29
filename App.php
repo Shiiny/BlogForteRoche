@@ -2,11 +2,14 @@
 
 use blog\Autoloader;
 use blog\MysqlDatabase;
+use blog\Auth\Session;
+use blog\Auth\Auth;
 
 class App {
 
 	private $settings = [];
 	private $db_instance;
+	private $session;
 	private static $_instance;
 
 	public $title = 'Blog ForteRoche';
@@ -22,9 +25,9 @@ class App {
 	 * [load description] Charge la session et l'autoloader
 	 */
 	public static function load() {
-		session_start();
 		require ROOT . '/Autoloader.php';
 		Autoloader::register();
+		self::getInstance()->getSession();
 	}
 
 	/**
@@ -52,7 +55,7 @@ class App {
 	 * @return [objet] une instance de $classname
 	 */
 	public function getModelClass($classname) {
-		$class_name = '\\blog\\model\\' .ucfirst($classname);
+		$class_name = 'blog\model\\' .ucfirst($classname);
 		return new $class_name($this->getDb());
 	}
 
@@ -62,10 +65,21 @@ class App {
 	 */
 	public function getDb() {
 		$config = App::getInstance();
-		if (is_null($this->db_instance)) {
+		if(is_null($this->db_instance)) {
 			$this->db_instance = new MysqlDatabase($config->get('db_name'), $config->get('db_user'), $config->get('db_pass'), $config->get('db_host'));
 		}
 		return $this->db_instance;
+	}
+
+	public function getSession() {
+		if(is_null($this->session)) {
+			$this->session = new Session();
+		}
+		return $this->session;
+	}
+
+	public function getAuth() {
+		return new Auth($this->getDb(), $this->getSession());
 	}
 
 	public function getTitle() {
@@ -76,8 +90,7 @@ class App {
 		$this->title = $this->title . ' | ' .$title;
 	}
 
-	public static function str_random($lenght) {
-		$alphabet = "0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
-		return substr(str_shuffle(str_repeat($alphabet, $lenght)), 0, $lenght);
+	public function redirect($page) {
+		header('Location:'.$page);
 	}
 }
