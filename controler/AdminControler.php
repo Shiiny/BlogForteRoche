@@ -17,13 +17,13 @@ class AdminControler extends Controler {
 		$this->loadModel('category');
 		$this->loadModel('comment');
 		// Auth
-		//$app = App::getInstance();
-		$auth = $this->user;
-		if(!$auth->logged()) {
+		$app = App::getInstance();
+		$app->getAuth()->restrict('admin', $app);
+		/*if(!$auth->logged()) {
 			//if(!$auth->permission()) {
 				$this->forbidden();
 			//}
-		}
+		}*/
 		
 	}
 

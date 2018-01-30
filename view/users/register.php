@@ -1,5 +1,4 @@
 <h1>S'inscrire</h1>
-<?php var_dump($_SESSION); ?>
 <?php if(!empty($errors)): ?>
 <div class="alert alert-danger">
 	<p>Vous n'avez pas rempli le formulaire correctement</p>

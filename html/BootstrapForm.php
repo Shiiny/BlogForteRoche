@@ -21,11 +21,23 @@ class BootstrapForm extends Form {
 	 * @param  array  $options
 	 * @return [string]
 	 */
-	public function input($name, $label, $options = []) {
+	public function input($name, $label, $options = [], $url = false) {
 		$type = isset($options['type']) ? $options['type'] : 'text';
+		$value = isset($options['value']) ? $options['value'] : '';
 		$label = '<label>'. $label .'</label>';
 		if($type === 'textarea') {
 			$input = '<textarea name="'.$name.'" class="form-control">'.$this->getValue($name).'</textarea>';
+		}
+		elseif($type === 'checkbox') {
+			$input = '<input type="'.$type.'" name="'.$name.'" value="'.$value.'">';
+			return $this->surround($input.$label);
+		}
+		elseif($type === 'password') {
+			if($url) {
+				$lien = '<a href="'.$url.'">(Mot de passe oublié)</a>';	
+				$label = '<label>'. $label . ' ' . $lien .'</label>';
+			}
+			$input = '<input type="'.$type.'" name="'.$name.'" class="form-control" value="'.$this->getValue($name).'">';
 		}
 		else {
 			$input = '<input type="'.$type.'" name="'.$name.'" class="form-control" value="'.$this->getValue($name).'">';
@@ -40,7 +52,7 @@ class BootstrapForm extends Form {
 	 * @param  array  $options
 	 * @return [string]
 	 */
-	public function select($name, $label, $options) {
+	public function select($name, $label = '', $options) {
 		$label = '<label>'. $label .'</label>';
 		$input = '<select class="form-control" name="'. $name .'">';
 		foreach ($options as $key => $value) {

@@ -8,9 +8,20 @@ class Session {
 		session_start();
 	}
 
+	public function write($key, $value) {
+		$_SESSION[$key] = $value;
+	}
+
 	public function read($key) {
 		return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
 	}
+
+	public function setInfo($field) {
+	if(isset($_SESSION['auth']->$field)) {
+		return $_SESSION['auth']->$field;
+	}
+	return false;
+}
 
 	public function setFlash($key, $msg) {
 		$_SESSION['flash'][$key] = $msg;
@@ -24,5 +35,9 @@ class Session {
 		$flash = $_SESSION['flash'];
 		unset($_SESSION['flash']);
 		return $flash;
+	}
+
+	public function destroy($key) {
+		unset($_SESSION[$key]);
 	}
 }

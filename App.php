@@ -92,5 +92,6 @@ class App {
 
 	public function redirect($page) {
 		header('Location:'.$page);
+		exit();
 	}
 }

@@ -23,17 +23,30 @@ class UsersControler extends Controler {
 		return $this->errors;
 	}
 	
-	public function login() {
-		$errors = false;
+	public function login($app) {
+		if($app->getAuth()->logged()) {
+			$app->redirect('index.php?p=users.account');
+		}
+		if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) {
+			$user = $app->getAuth()->login($_POST['username'], $_POST['password'], isset($_POST['remember']), $app);
 
-		
+			if($user) {
+				$app->getSession()->setFlash('success', "Vous êtes connecté");
+				$app->redirect('index.php?p=users.account');
+			}
+			else {
+				$app->getSession()->setFlash('danger', "Identifiant ou mot de passe incorrecte");
+			}
+		}
+			
 		$form = new BootstrapForm($_POST);
-		$this->render('users.login', compact('form', 'errors'));
+		$this->render('users.login', compact('form'));
 	}
 
 	public function register($app) {
 		if(!empty($_POST)) {
-			
+			$errors = [];
+
 			if(!preg_match('/^[a-zA-Z0-9_]+$/', $_POST['username']) || !isset($_POST['username'])) {
 				$this->errors['username'] = "Votre pseudo n'est pas valide !";
 			}
@@ -56,7 +69,7 @@ class UsersControler extends Controler {
 				$this->errors['password'] = "Vous devez rentrer un mot de passe valide";
 			}
 			if($this->isValid()) {
-				$app->getAuth()->register($_POST['username'], $_POST['password'], $_POST['email']);
+				$app->getAuth()->insert($_POST['username'], $_POST['password'], $_POST['email'], $app);
 				$app->getSession()->setFlash('success', "Un email de confirmation vous a été envoyé.");
 				$app->redirect('index.php?p=users.login');
 			}
@@ -69,19 +82,71 @@ class UsersControler extends Controler {
 	}
 
 	public function confirm($app) {
-		$user = $this->user->byUserId($_GET['id']);
-		var_dump($user);
-		var_dump($user->confirmation_token == $_GET['token']);
-		die();
-		if($user && $user->confirmation_token == $_GET['token']){
-			$this->user->validateAccount($_GET['id']);
-			$app->getSession()->setFlash('success', "Votre compte a bien été activé");
-			$app->getSession()->write('auth', $user);
-			$app->redirect('index.php?p=users.account');
+		if(isset($_GET['id']) && isset($_GET['token'])) {
+			$user = $this->user->byUserId($_GET['id']);
+			if($user && $user->confirmation_token == $_GET['token']){
+				$this->user->validateAccount($user->id);
+				$app->getSession()->setFlash('success', "Votre compte a bien été activé");
+				$app->getSession()->write('auth', $user);
+				$app->redirect('index.php?p=users.account');
+			}
+			else {
+				$app->getSession()->setFlash('danger', "Ce compte à déjà été activé");
+				$app->redirect('index.php?p=users.login');
+			}
+		}
+	}
+
+	public function account($app) {
+		$app->getAuth()->restrict('member', $app);
+		$this->render('users.account', compact(''));
+	}
+
+	public function logout($app) {
+		setcookie('remember', NULL, -1);
+		$app->getSession()->destroy('auth');
+		$app->getSession()->setFlash('success', "Vous êtes déconnecté");
+		$app->redirect('index.php?p=users.login');
+	}
+
+	public function forget($app) {
+		if(!empty($_POST) && !empty($_POST['email'])) {
+			if($app->getAuth()->forget($_POST['email'], $app)) {
+				$app->getSession()->setFlash('success', "Un email vous a été envoyé pour réinitialiser votre mot de passe");
+				$app->redirect('index.php?p=users.login');
+			}
+			else {
+				$app->getSession()->setFlash('danger', "Aucun compte ne correspond à cette adresse");
+			}
+		}
+		$form = new BootstrapForm($_POST);
+		$this->render('users.forget', compact('form'));
+	}
+
+	public function reset($app) {
+		if(isset($_GET['id']) && isset($_GET['token'])) {
+			$user = $this->user->checkResetToken($_GET['id'], $_GET['token']);
+			if($user) {
+				if(!empty($_POST)) {
+					if(!empty($_POST['password']) && $_POST['password'] === $_POST['password_confirm']) {
+						$app->getAuth()->resetPassword($_POST['password'], $user, $app);
+						$app->getSession()->setFlash('success', "Votre mot de passe a bien été modifié");
+						$app->redirect('account.php');
+					}
+					else {
+						$app->getSession()->setFlash('danger', "Les mots de passe ne sont pas identique");
+					}
+				}
+			}
+			else {
+				$app->getSession()->setFlash('danger', "Ce token n'est pas valide");
+				$app->redirect('login.php');
+			}
 		}
 		else {
-			$app->getSession()->setFlash('success', "Votre compte a bien été activé");
-			$app->redirect('index.php?p=users.login');
+			$app->redirect('login.php');
 		}
+		$form = new BootstrapForm($_POST);
+		$this->render('users.reset', compact('form'));
 	}
 }
