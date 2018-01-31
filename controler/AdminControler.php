@@ -17,14 +17,7 @@ class AdminControler extends Controler {
 		$this->loadModel('category');
 		$this->loadModel('comment');
 		// Auth
-		$app = App::getInstance();
-		$app->getAuth()->restrict('admin', $app);
-		/*if(!$auth->logged()) {
-			//if(!$auth->permission()) {
-				$this->forbidden();
-			//}
-		}*/
-		
+		App::getInstance()->getAuth()->allow('admin');
 	}
 
 	public function index() {

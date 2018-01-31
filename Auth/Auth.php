@@ -7,10 +7,12 @@ use blog\Auth\Session;
 use \App;
 
 class Auth {
+	private $app;
 	private $db;
 	private $session;
 
-	public function __construct(MysqlDatabase $db, Session $session) {
+	public function __construct(App $app, MysqlDatabase $db, Session $session) {
+		$this->app = $app;
 		$this->db = $db;
 		$this->session = $session;
 	}
@@ -53,6 +55,30 @@ class Auth {
 		setcookie('remember', $user_id . '==' .$remember_token. sha1($user_id. 'test'), time() + 60 * 60 * 24 * 7);
 	}
 
+	public function connectFromCookie() {
+		if(isset($_COOKIE['remember']) && !$this->logged()) {
+			$remember_token = $_COOKIE['remember'];
+			$parts = explode('==', $remember_token);
+			$user_id = $parts[0];
+
+			$user = $this->app->getModelClass('user')->byUserId($user_id);
+
+			if($user) {			
+				$expected = $user->id . '==' . $user->remember . sha1($user->id . 'test');
+				if($expected == $remember_token) {
+					$this->connect($user);
+					setcookie('remember', $remember_token, time() + 60 * 60 * 24 * 7);
+				}
+				else {
+					setcookie('remember', NULL, -1);
+				}
+			}
+			else {
+				setcookie('remember', NULL, -1);
+			}
+		}
+	}
+
 	public function insert($username, $password, $email, App $app) {
 		$password = $this->hashPassword($password);
 		$token = $this->tokenRandom(60);
@@ -81,19 +107,26 @@ class Auth {
 		$this->connect($user);
 	}
 
-	public function restrict($rang, App $app) {
-		var_dump($rang);
+	public function restrict() {
 		if(!$this->session->read('auth')) {
 			$this->session->setFlash('danger', "Vous n'avez pas le droit d'accéder à cette page");
-			$app->redirect('index.php?p=users.login');
+			$this->app->redirect('index.php?p=users.login');
 		}
+	}
+
+	public function allow($rang) {
 		$roles = [];
-		$data = $app->getModelClass('user')->allRoles();
+		$data = $this->app->getModelClass('user')->allRoles();
 		foreach ($data as $key) {
 			$roles[$key->slug] = $key->level;
 		}
+		//var_dump('Le rang est : '.$roles[$rang]);
 		if($roles[$rang] > $this->session->setInfo('level')) {
-			header('Location:index.php');
+			$this->session->setFlash('danger', "Vous n'avez pas le droit d'accéder à cette page");
+
+			//$this->app->redirect('index.php?p=users.account');
+			//header('Location:index.php');
 		}
+		$this->restrict();
 	}
 }

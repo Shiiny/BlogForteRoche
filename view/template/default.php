@@ -34,7 +34,7 @@
             <?php if(App::getInstance()->getAuth()->logged()): ?>
               <li><a href="index.php?p=users.account">Mon compte</a></li>
               <li><a href="index.php?p=users.logout">Se déconnecter</a></li>
-              <li><a href="index.php?p=admin.posts.index">Admin</a></li>
+                <li><a href="index.php?p=admin.posts.index">Admin</a></li>
             <?php else: ?>
             <li class="active"><a href="index.php?p=users.register">S'inscrire</a></li>  
             <li><a href="index.php?p=users.login">Se connecter</a></li>

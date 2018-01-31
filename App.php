@@ -79,7 +79,7 @@ class App {
 	}
 
 	public function getAuth() {
-		return new Auth($this->getDb(), $this->getSession());
+		return new Auth(self::getInstance(), $this->getDb(), $this->getSession());
 	}
 
 	public function getTitle() {

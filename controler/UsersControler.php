@@ -24,6 +24,7 @@ class UsersControler extends Controler {
 	}
 	
 	public function login($app) {
+		$app->getAuth()->connectFromCookie();
 		if($app->getAuth()->logged()) {
 			$app->redirect('index.php?p=users.account');
 		}
@@ -98,7 +99,7 @@ class UsersControler extends Controler {
 	}
 
 	public function account($app) {
-		$app->getAuth()->restrict('member', $app);
+		$app->getAuth()->allow('member');
 		$this->render('users.account', compact(''));
 	}
 

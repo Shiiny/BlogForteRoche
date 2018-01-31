@@ -1,5 +1,3 @@
-<?php var_dump($_SESSION); ?>
-
 <h1>Administrer les articles</h1>
 
 <!--<div class="col-sm-3">
