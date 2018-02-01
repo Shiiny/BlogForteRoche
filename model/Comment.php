@@ -25,11 +25,11 @@ class Comment extends Manager{
 	}
 
 	/**	
-	*	Supprime le commentaire identifié
+	*	Supprime les commentaires identifiés par l'id du post
 	*	@param [int] $post_id
 	*	@return array
 	*/
 	public function deleteComment($post_id) {
-		return $this->requete("DELETE FROM {$this->table} WHERE post_id = ?", [$post_id], true);
+		return $this->requete("DELETE FROM {$this->table} WHERE post_id = ?", [$post_id]);
 	}
 }

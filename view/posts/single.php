@@ -22,7 +22,7 @@
 		<?php if(App::getInstance()->getSession()->getAllow('username', $comment->author)): ?>
 		<a href="?p=comments.editComment&id=<?= $comment->id; ?>" class="btn btn-info">Editer</a>
 		<?php endif; ?>
-		<a href="?p=comments.flagComment&id=<?= $comment->id; ?>">Signaler ce commentaire</a>
+		<a href="?p=comments.reportComment&id=<?= $comment->id; ?>">Signaler ce commentaire</a>
 	</div>
 </div>
 <?php endforeach; ?>

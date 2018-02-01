@@ -16,15 +16,39 @@ class AdminControler extends Controler {
 		$this->loadModel('post');
 		$this->loadModel('category');
 		$this->loadModel('comment');
+		$this->loadModel('report');
 		// Auth
 		App::getInstance()->getAuth()->allow('admin');
 	}
 
-	public function index() {
+	public function index($app) {
+		$users = $this->user->userRecent();
+
+		$this->render('admin.index', compact('users'));
+	}
+
+	public function posts() {
 		$posts = $this->post->all();
+
+		$this->render('admin.posts.index', compact('posts'));
+	}
+
+	public function categories() {
 		$categories = $this->category->all();
+
+		$this->render('admin.categories.index', compact('categories'));
+	}
+
+	public function comments() {
 		$comments = $this->comment->allByPost();
-		$this->render('admin.posts.index', compact('posts', 'categories', 'comments'));
+
+		$this->render('admin.comments.index', compact('comments'));
+	}
+
+	public function users() {
+		$users = $this->user->allUsers();
+
+		$this->render('admin.users.index', compact('users'));
 	}
 
 	public function add() {
@@ -75,6 +99,14 @@ class AdminControler extends Controler {
 	}
 
 	public function delete() {
+		if($_GET['p'] === 'admin.users.delete') {
+			if(!empty($_POST)) {
+				var_dump($_POST);
+				die();
+				$user = $this->user->delete($_POST['id']);
+				$comment = $this->comment;
+			}
+		}
 		if($_GET['p'] === 'admin.comments.delete') {
 			if(!empty($_POST)) {
 				$result = $this->comment->delete($_POST['id']);

@@ -7,12 +7,20 @@ use blog\model\Manager;
 class User extends Manager {
 	protected $table;
 
+	public function allUsers() {
+		return $this->requete("SELECT * FROM {$this->table} LEFT JOIN roles ON users.role_id = roles.role_id WHERE confirmed_at IS NOT NULL");
+	}
+
+	public function userRecent() {
+		return $this->requete("SELECT * FROM {$this->table} WHERE confirmed_at IS NOT NULL ORDER BY confirmed_at DESC", null, true);
+	}
+
 	public function isUniq($field, $value) {
 		return $this->requete("SELECT id FROM {$this->table} WHERE $field = ?", [$value], true);
 	}
 
 	public function selectUser($username) {
-		return $this->requete("SELECT * FROM {$this->table} LEFT JOIN roles ON users.role_id = roles.id WHERE username = :username OR email = :username AND confirmed_at IS NOT NULL", ['username' => $username], true);
+		return $this->requete("SELECT * FROM {$this->table} LEFT JOIN roles ON users.role_id = roles.role_id WHERE username = :username OR email = :username AND confirmed_at IS NOT NULL", ['username' => $username], true);
 	}
 
 	public function insertUser($username, $password, $email, $token) {
@@ -20,7 +28,7 @@ class User extends Manager {
 	}
 
 	public function byUserId($user_id) {
-		return $this->requete("SELECT * FROM {$this->table} LEFT JOIN roles ON users.role_id = roles.id WHERE users.id = ?", [$user_id], true);
+		return $this->requete("SELECT * FROM {$this->table} LEFT JOIN roles ON users.role_id = roles.role_id WHERE users.id = ?", [$user_id], true);
 	}
 
 	public function validateAccount($user_id) {
