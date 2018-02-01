@@ -54,7 +54,6 @@
           </div>
         <?php endforeach; ?>
       <?php endif; ?>
-      <?php if(App::getInstance()->getAuth()->logged()): ?>
         <?php if(App::getInstance()->getSession()->getAllow('slug', 'admin')): ?>
           <div id="adminmenu" class="col-sm-3">
             <ul>
@@ -65,7 +64,7 @@
             </ul>
           </div>
           <div id="adminbody" class="col-sm-9">
-      <?php endif; endif; ?>
+      <?php endif; ?>
 
       <?= $content; ?>
 

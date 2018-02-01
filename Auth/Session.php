@@ -42,8 +42,8 @@ class Session {
 	}
 
 	public function getAllow($field, $key) {
-		if($_SESSION['auth']->$field === $key) {
-			return true;
+		if(isset($_SESSION['auth'])){
+			return $_SESSION['auth']->$field === $key;
 		}
 		return false;
 	}

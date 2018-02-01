@@ -21,7 +21,7 @@
 	<div class="list-group-item">
 		<?php if(App::getInstance()->getSession()->getAllow('username', $comment->author)): ?>
 		<a href="?p=comments.editComment&id=<?= $comment->id; ?>" class="btn btn-info">Editer</a>
-		<?php endif; ?>
+		<?php endif;?>
 		<a href="?p=comments.reportComment&id=<?= $comment->id; ?>">Signaler ce commentaire</a>
 	</div>
 </div>

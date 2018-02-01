@@ -26,10 +26,10 @@ class Auth {
 		return substr(str_shuffle(str_repeat($alphabet, $lenght)), 0, $lenght);
 	}
 
-	public function logged() {
+	public function logged($field = false, $key = false) {
 		if(!$this->session->read('auth')) {
 			return false;
-		}		
+		}
 		return $this->session->read('auth');
 	}
 

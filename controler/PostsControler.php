@@ -4,6 +4,7 @@ namespace blog\controler;
 
 use blog\controler\Controler;
 use blog\html\BootstrapForm;
+use \App;
 
 class PostsControler extends Controler {
 
