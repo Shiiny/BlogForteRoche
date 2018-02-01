@@ -17,11 +17,11 @@ class Session {
 	}
 
 	public function setInfo($field) {
-	if(isset($_SESSION['auth']->$field)) {
-		return $_SESSION['auth']->$field;
+		if(isset($_SESSION['auth']->$field)) {
+			return $_SESSION['auth']->$field;
+		}
+		return false;
 	}
-	return false;
-}
 
 	public function setFlash($key, $msg) {
 		$_SESSION['flash'][$key] = $msg;
@@ -39,5 +39,12 @@ class Session {
 
 	public function destroy($key) {
 		unset($_SESSION[$key]);
+	}
+
+	public function getAllow($field, $key) {
+		if($_SESSION['auth']->$field === $key) {
+			return true;
+		}
+		return false;
 	}
 }

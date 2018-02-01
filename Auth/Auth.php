@@ -29,7 +29,7 @@ class Auth {
 	public function logged() {
 		if(!$this->session->read('auth')) {
 			return false;
-		}
+		}		
 		return $this->session->read('auth');
 	}
 
@@ -120,12 +120,9 @@ class Auth {
 		foreach ($data as $key) {
 			$roles[$key->slug] = $key->level;
 		}
-		//var_dump('Le rang est : '.$roles[$rang]);
 		if($roles[$rang] > $this->session->setInfo('level')) {
 			$this->session->setFlash('danger', "Vous n'avez pas le droit d'accéder à cette page");
-
-			//$this->app->redirect('index.php?p=users.account');
-			//header('Location:index.php');
+			$this->app->redirect('index.php?p=users.login');
 		}
 		$this->restrict();
 	}

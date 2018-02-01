@@ -20,7 +20,7 @@ class User extends Manager {
 	}
 
 	public function byUserId($user_id) {
-		return $this->requete("SELECT * FROM {$this->table} WHERE id = ?", [$user_id], true);
+		return $this->requete("SELECT * FROM {$this->table} LEFT JOIN roles ON users.role_id = roles.id WHERE users.id = ?", [$user_id], true);
 	}
 
 	public function validateAccount($user_id) {

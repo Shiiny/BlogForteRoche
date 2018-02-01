@@ -16,7 +16,7 @@ class CommentsControler extends Controler {
 	public function addComment() {
 		if(!empty($_POST)) {
 			$result = $this->comment->create([
-				'author' => $_POST['author'],
+				'author' => $_SESSION['auth']->username,
 				'comment' => $_POST['comment'],
 				'post_id' => $_GET['id']
 			]);

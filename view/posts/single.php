@@ -7,7 +7,6 @@
 	<button id="addComment" class="btn btn-success">Commentaire</button>
 	<button id="closeComment" class="btn">Fermer</button>
 	<form id="formComment" method="post" action="?p=comments.addComment&id=<?= $post->id; ?>">
-		<?= $form->input('author', 'Auteur'); ?>
 		<?= $form->input('comment', 'Commentaire', ['type' => 'textarea']); ?>
 		<button class="btn btn-primary">Envoyer</button>
 	</form>
@@ -20,7 +19,10 @@
 	</div>
 	<div class="list-group-item"><?= $comment->comment ?></div>
 	<div class="list-group-item">
+		<?php if(App::getInstance()->getSession()->getAllow('username', $comment->author)): ?>
 		<a href="?p=comments.editComment&id=<?= $comment->id; ?>" class="btn btn-info">Editer</a>
+		<?php endif; ?>
+		<a href="?p=comments.flagComment&id=<?= $comment->id; ?>">Signaler ce commentaire</a>
 	</div>
 </div>
 <?php endforeach; ?>

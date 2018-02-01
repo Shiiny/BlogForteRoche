@@ -32,9 +32,11 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <?php if(App::getInstance()->getAuth()->logged()): ?>
-              <li><a href="index.php?p=users.account">Mon compte</a></li>
-              <li><a href="index.php?p=users.logout">Se déconnecter</a></li>
+              <?php if(App::getInstance()->getSession()->getAllow('slug', 'admin')): ?>
                 <li><a href="index.php?p=admin.posts.index">Admin</a></li>
+              <?php endif; ?>
+              <li><a href="index.php?p=users.account">Mon compte</a></li>
+              <li><a href="index.php?p=users.logout">Se déconnecter</a></li>  
             <?php else: ?>
             <li class="active"><a href="index.php?p=users.register">S'inscrire</a></li>  
             <li><a href="index.php?p=users.login">Se connecter</a></li>
@@ -45,7 +47,7 @@
     </nav>
 
     <div class="container">
-      <?php var_dump($_SESSION); ?>
+      <?php //var_dump($_SESSION); ?>
       <?php if(App::getInstance()->getSession()->read('flash')): ?>
         <?php foreach (App::getInstance()->getSession()->getFlashes() as $type => $msg): ?>
           <div class="alert alert-<?= $type; ?>">
