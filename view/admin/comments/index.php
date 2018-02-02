@@ -20,13 +20,13 @@
 				<tr>
 					<td><?= $comment->author; ?></td>
 					<td class="content"><?= $comment->getExtrait(); ?></td>
-					<td><?= $comment->comment_date; ?></td>
-					<td><?= $comment->title; ?></td>
+					<td class="item-info"><?= $comment->comment_date; ?></td>
+					<td class="item-info"><?= $comment->title; ?></td>
 					<td>
-						<a href="?p=admin.comments.editComment&id=<?= $comment->id; ?>" class="btn btn-primary">Editer</a>
+						<a href="?p=admin.comments.editComment&id=<?= $comment->id; ?>" class="btn btn-primary"><i class="fas fa-edit"></i></a>
 						<form action="?p=admin.comments.delete" method="post" style="display: inline;">
 							<input type="hidden" name="id" value="<?= $comment->id; ?>">
-							<button type="submit" class="btn btn-danger">Supprimer</button>
+							<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
 						</form>
 					</td>			
 				</tr>

@@ -1,8 +1,8 @@
 <h1>S'inscrire</h1>
 <?php if(!empty($errors)): ?>
-<div class="alert alert-danger">
+<div class="alert alert-danger" role="alert">
 	<p>Vous n'avez pas rempli le formulaire correctement</p>
-	<ul>
+	<ul class="error">
 	<?php foreach ($errors as $error): ?>
 		<li><?= $error; ?></li>
 	<?php endforeach; ?>

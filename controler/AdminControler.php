@@ -80,8 +80,7 @@ class AdminControler extends Controler {
 	}
 
 	public function addComment() {
-		$user = $this->user->getUser($_SESSION['auth']);
-		var_dump($user);
+		$user = $this->user->byUserId($_SESSION['auth']->id);
 		if(!empty($_POST)) {
 			$result = $this->comment->create([
 				'author' => $user->username,

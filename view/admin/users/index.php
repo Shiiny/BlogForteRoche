@@ -25,7 +25,7 @@
 						<td>
 							<form action="?p=admin.users.delete" method="post" style="display: inline;">
 								<input type="hidden" name="id" value="<?= $user->id; ?>">
-								<button type="submit" class="btn btn-danger">Supprimer</button>
+								<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
 							</form>
 						</td>		
 					</tr>

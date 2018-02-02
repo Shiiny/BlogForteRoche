@@ -3,12 +3,12 @@
 	<div class="col-sm-8">
 		<?php
 
-		foreach($posts as $post): ?>
-		<?php //var_dump($posts); ?>
-		<h2><a href="<?= $post->getUrl(); ?>"><?= $post->title; ?></a></h2>
-		<p><em><?= $post->category; ?></em></p>
+		foreach($chapters as $chapter): ?>
+		<?php //var_dump($chapters); ?>
+		<h2><a href="<?= $chapter->getUrl(); ?>"><?= $chapter->title; ?></a></h2>
+		<p><em><?= $chapter->category; ?></em></p>
 
-		<p><?= $post->getExtrait(); ?></p>
+		<p><?= $chapter->getExtrait(); ?></p>
 
 		<?php endforeach; ?>
 

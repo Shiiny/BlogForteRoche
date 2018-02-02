@@ -6,19 +6,19 @@ use blog\controler\Controler;
 use blog\html\BootstrapForm;
 use \App;
 
-class PostsControler extends Controler {
+class ChaptersControler extends Controler {
 
 	public function __construct() {
 		parent::__construct();
-		$this->loadModel('post');
+		$this->loadModel('chapter');
 		$this->loadModel('category');
 		$this->loadModel('comment');
 	}
 
 	public function index() {
-		$posts = $this->post->getList();
+		$chapters = $this->chapter->getList();
 		$categories = $this->category->all();
-		$this->render('posts.index', compact('posts', 'categories'));
+		$this->render('chapters.index', compact('chapters', 'categories'));
 	}
 
 	public function category() {
@@ -26,20 +26,20 @@ class PostsControler extends Controler {
 		if($categorie === false) {
 			$this->notFound();
 		}
-		$posts = $this->post->byCategory($_GET['id']);
+		$chapters = $this->chapter->byCategory($_GET['id']);
 		$listCategories = $this->category->all();
-		$this->render('posts.category', compact('categorie', 'posts', 'listCategories'));
+		$this->render('chapters.category', compact('categorie', 'chapters', 'listCategories'));
 	}
 
 	public function single($app) {
-		$post = $this->post->findWithCategory($_GET['id']);
+		$chapter = $this->chapter->findWithCategory($_GET['id']);
 		$comments = $this->comment->byComment($_GET['id']);
-		if ($post === false) {
+		if ($chapter === false) {
 			$this->notFound();
 		}
 
-		$app->title = $post->title;
-		$form = new BootstrapForm($_POST);
-		$this->render('posts.single', compact('post', 'app', 'comments', 'form'));
+		$app->title = $chapter->title;
+		$form = new BootstrapForm($_chapter);
+		$this->render('chapters.single', compact('chapter', 'app', 'comments', 'form'));
 	}
 }

@@ -19,13 +19,14 @@
 			<?php foreach ($posts as $post): ?>
 				<tr>
 					<td><?= $post->id; ?></td>
-					<td class="content"><?= $post->title; ?></td>
-					<td><?= $post->dateAdd; ?></td>
+					<td><?= $post->title; ?></td>
+					<td class="item"><?= $post->dateAdd; ?></td>
 					<td>
-						<a href="?p=admin.posts.edit&id=<?= $post->id; ?>" class="btn btn-primary">Editer</a>
+						<a href="<?= $post->getUrl(); ?>" class="btn-default"><i class="fas fa-eye" aria-hidden="true"></i></a>
+						<a href="?p=admin.posts.edit&id=<?= $post->id; ?>" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i></a>
 						<form action="?p=admin.posts.delete" method="post" style="display: inline;">
 							<input type="hidden" name="id" value="<?= $post->id; ?>">
-							<button type="submit" class="btn btn-danger">Supprimer</button>
+							<button type="submit" class="btn btn-danger"><i class="fas fa-trash" aria-hidden="true"></i></button>
 						</form>
 					</td>			
 				</tr>

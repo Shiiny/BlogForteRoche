@@ -9,10 +9,16 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
 
     <!-- Le styles -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="../public/css/style.css" type="text/css">   
+  <link rel="stylesheet" href="../public/css/style.css" type="text/css">
+  <!--<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>-->
+  <script src="../public/js/tinymce/tinymce.min.js"></script>
+  <script src="../public/js/langs/fr_FR.js"></script>
+  <script>tinymce.init({ selector:'textarea' });</script>
   
   </head>
 

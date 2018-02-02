@@ -2,12 +2,12 @@
 <div class="row">
 	<div class="col-sm-8">
 		<?php
-		foreach($posts as $post): ?>
-		<?php// var_dump($posts); ?>
-		<h2><a href="<?= $post->getUrl(); ?>"><?= $post->title; ?></a></h2>
-		<p><em class="col-sm-6"><?= $post->category; ?></em><em class="col-sm-6" style="text-align: right"><?= $post->dateAdd; ?></em></p>
+		foreach($chapters as $chapter): ?>
+		<?php// var_dump($chapters); ?>
+		<h2><a href="<?= $chapter->getUrl(); ?>"><?= $chapter->title; ?></a></h2>
+		<p><em class="col-sm-6"><?= $chapter->category; ?></em><em class="col-sm-6" style="text-align: right"><?= $chapter->dateAdd; ?></em></p>
 
-		<p><?= $post->getExtrait(); ?></p>
+		<p><?= $chapter->getExtrait(); ?></p>
 
 		<?php endforeach; ?>
 

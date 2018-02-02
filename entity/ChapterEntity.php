@@ -4,10 +4,10 @@ namespace blog\entity;
 
 use blog\entity\Entity;
 
-class PostEntity extends Entity {
+class ChaptersEntity extends Entity {
 	
 	public function getUrl() {
-		return 'index.php?p=posts.single&id=' . $this->id;
+		return 'index.php?p=chapters.single&id=' . $this->id;
 	}
 
 	public function getExtrait() {
