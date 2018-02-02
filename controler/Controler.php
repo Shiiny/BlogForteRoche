@@ -16,15 +16,14 @@ class Controler {
 	protected function render($view, $variables = []) {
 		ob_start();
 		extract($variables);
+
 		require($this->viewPath . str_replace('.', '/', $view) . '.php');
 		$content = ob_get_clean();
 		require($this->viewPath . 'template/' . $this->template . '.php');
 	}
 
 	protected function loadModel($model_name) {
-		//var_dump($model_name);
 		$this->$model_name = App::getInstance()->getModelClass($model_name);
-		//var_dump($this->$model_name);
 	}
 
 	protected function notFound() {

@@ -1,3 +1,5 @@
+<?php require('../view/admin/menu.php'); ?>
+
 	<h1>Administrer les utilisateurs</h1>
 
 	

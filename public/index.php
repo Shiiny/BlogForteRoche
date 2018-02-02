@@ -16,6 +16,9 @@ $page = explode('.', $page);
 $controler = 'blog\controler\\' . ucfirst($page[0]) . 'Controler';
 $action = $page[1];
 
+if(isset($page[2])) {
+	$action = $page[2];
+}
 
 
 var_dump($controler, $action);

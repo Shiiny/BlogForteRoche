@@ -1,3 +1,5 @@
+<?php require('../view/admin/menu.php'); ?>
+
 	<h1>Administrer les commentaires</h1>
 	<p>
 		<a href="?p=admin.comments.addComment" class="btn btn-success">Ajouter</a>

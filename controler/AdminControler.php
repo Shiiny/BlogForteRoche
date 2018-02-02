@@ -16,12 +16,11 @@ class AdminControler extends Controler {
 		$this->loadModel('post');
 		$this->loadModel('category');
 		$this->loadModel('comment');
-		$this->loadModel('report');
 		// Auth
 		App::getInstance()->getAuth()->allow('admin');
 	}
 
-	public function index($app) {
+	public function index() {
 		$users = $this->user->userRecent();
 
 		$this->render('admin.index', compact('users'));

@@ -1,3 +1,4 @@
+<?php require('../view/admin/menu.php'); ?>
 	<h1>Dernier utilisateur inscrit</h1>
 
 		<table class="table">
