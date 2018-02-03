@@ -69,8 +69,6 @@ class Manager {
 	}
 
 	public function delete($id) {
-		var_dump($id);
-		die();
 		return $this->requete("DELETE FROM {$this->table} WHERE id = ?", [$id], true);
 	}
 

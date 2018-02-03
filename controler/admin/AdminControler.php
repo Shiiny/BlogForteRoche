@@ -1,6 +1,6 @@
 <?php
 
-namespace blog\controler;
+namespace blog\controler\admin;
 
 use blog\controler\Controler;
 use \App;
@@ -12,10 +12,11 @@ class AdminControler extends Controler {
 	public function __construct() {
 		parent::__construct();
 
+		//$this->loadModel('book');
 		$this->loadModel('user');
-		$this->loadModel('post');
-		$this->loadModel('category');
-		$this->loadModel('comment');
+		//$this->loadModel('chapter');
+		//$this->loadModel('category');
+		//$this->loadModel('comment');
 		// Auth
 		App::getInstance()->getAuth()->allow('admin');
 	}
@@ -26,10 +27,10 @@ class AdminControler extends Controler {
 		$this->render('admin.index', compact('users'));
 	}
 
-	public function posts() {
-		$posts = $this->post->all();
+	public function chapters() {
+		$chapters = $this->chapter->all();
 
-		$this->render('admin.posts.index', compact('posts'));
+		$this->render('admin.chapters.index', compact('chapters'));
 	}
 
 	public function categories() {
@@ -39,7 +40,7 @@ class AdminControler extends Controler {
 	}
 
 	public function comments() {
-		$comments = $this->comment->allByPost();
+		$comments = $this->comment->allBychapter();
 
 		$this->render('admin.comments.index', compact('comments'));
 	}
@@ -50,85 +51,85 @@ class AdminControler extends Controler {
 		$this->render('admin.users.index', compact('users'));
 	}
 
-	public function add() {
-		if(!empty($_POST)) {
-			$result = $this->post->create([
-				'title' => $_POST['title'],
-				'content' => $_POST['content'],
-				'category_id' => $_POST['category_id']
+	/*public function add() {
+		if(!empty($_chapter)) {
+			$result = $this->chapter->create([
+				'title' => $_chapter['title'],
+				'content' => $_chapter['content'],
+				'category_id' => $_chapter['category_id']
 			]);
 			if($result) {
 				return $this->index();
 			}
 		}
 		$categories = $this->category->extract('id', 'title');
-		$form = new BootstrapForm($_POST);
-		$this->render('admin.posts.add', compact('categories', 'form'));		
-	}
+		$form = new BootstrapForm($_chapter);
+		$this->render('admin.chapters.add', compact('categories', 'form'));		
+	}*/
 
 	public function addCategory() {
-		if(!empty($_POST)) {
+		if(!empty($_chapter)) {
 				$result = $this->category->create([
-					'title' => $_POST['title']
+					'title' => $_chapter['title']
 				]);
 				if($result) {
 					return $this->index();
 				}
 			}
-			$form = new BootstrapForm($_POST);
+			$form = new BootstrapForm($_chapter);
 			$this->render('admin.categories.add', compact('form'));
 	}
 
 	public function addComment() {
 		$user = $this->user->byUserId($_SESSION['auth']->id);
-		if(!empty($_POST)) {
+		if(!empty($_chapter)) {
 			$result = $this->comment->create([
 				'author' => $user->username,
-				'comment' => $_POST['comment'],
-				'post_id' => $_POST['post_id']
+				'comment' => $_chapter['comment'],
+				'chapter_id' => $_chapter['chapter_id']
 			]);
 			if($result) {
 				return $this->index();
 			}
 		}
-		$posts = $this->post->extract('id', 'title');
-		$form = new BootstrapForm($_POST);
-		$this->render('admin.comments.add', compact('posts', 'form'));
+		$chapters = $this->chapter->extract('id', 'title');
+		$form = new BootstrapForm($_chapter);
+		$this->render('admin.comments.add', compact('chapters', 'form'));
 	}
 
 	public function delete() {
 		if($_GET['p'] === 'admin.users.delete') {
-			if(!empty($_POST)) {
-				var_dump($_POST);
+			if(!empty($_chapter)) {
+				var_dump($_chapter);
 				die();
-				$user = $this->user->delete($_POST['id']);
+				$user = $this->user->delete($_chapter['id']);
 				$comment = $this->comment;
 			}
 		}
 		if($_GET['p'] === 'admin.comments.delete') {
-			if(!empty($_POST)) {
-				$result = $this->comment->delete($_POST['id']);
+			if(!empty($_chapter)) {
+				$result = $this->comment->delete($_chapter['id']);
 			}
 		}
 		if($_GET['p'] === 'admin.categories.delete') {
-			if(!empty($_POST)) {
-				$result = $this->category->delete($_POST['id']);
+			if(!empty($_chapter)) {
+				$result = $this->category->delete($_chapter['id']);
 			}
 		}
 		else {
-			if(!empty($_POST)) {
-				$result = $this->post->delete($_POST['id']);
-				$resComment = $this->comment->deleteComment($_POST['id']);
+			if(!empty($_chapter)) {
+				$result = $this->chapter->delete($_chapter['id']);
+				$resComment = $this->comment->deleteComment($_chapter['id']);
 			}
 		}
-		header('Location: index.php?p=admin.posts.index');		
+		header('Location: index.php?p=admin.chapters.index');		
 	}
 
 	public function edit() {
 		if($_GET['p'] === 'admin.categories.edit') {
-			if(!empty($_POST)) {
+			if(!empty($_chapter)) {
 				$result = $this->category->update($_GET['id'], [
-					'title' => $_POST['title']
+					'title' => $_chapter['title']
 				]);
 				if($result) {
 					return $this->index();
@@ -140,36 +141,36 @@ class AdminControler extends Controler {
 			$this->render('admin.categories.add', compact('category', 'form'));
 		}
 		else {
-			if(!empty($_POST)) {
-				$result = $this->post->update($_GET['id'], [
-					'title' => $_POST['title'],
-					'content' => $_POST['content'],
-					'category_id' => $_POST['category_id']
+			if(!empty($_chapter)) {
+				$result = $this->chapter->update($_GET['id'], [
+					'title' => $_chapter['title'],
+					'content' => $_chapter['content'],
+					'category_id' => $_chapter['category_id']
 				]);
 				if($result) {
 					return $this->index();
 				}
 			}
-			$post = $this->post->find($_GET['id']);
+			$chapter = $this->chapter->find($_GET['id']);
 
 			$categories = $this->category->extract('id', 'title');
-			$form = new BootstrapForm($post);
-			$this->render('admin.posts.add', compact('post', 'categories', 'form'));
+			$form = new BootstrapForm($chapter);
+			$this->render('admin.chapters.add', compact('chapter', 'categories', 'form'));
 		}
 	}
 
 	public function editComment() {
-		if(!empty($_POST)) {
+		if(!empty($_chapter)) {
 			$result = $this->comment->update($_GET['id'], [
-				'comment' => $_POST['comment']
+				'comment' => $_chapter['comment']
 			]);
 			if($result) {
 				return $this->index();
 			}
 		}
 		$comment = $this->comment->find($_GET['id']);
-		$posts = $this->post->extract('id', 'title');			
+		$chapters = $this->chapter->extract('id', 'title');			
 		$form = new BootstrapForm($comment);
-		$this->render('admin.comments.add', compact('comment', 'posts', 'form'));
+		$this->render('admin.comments.add', compact('comment', 'chapters', 'form'));
 	}
 }

@@ -9,16 +9,25 @@ if(isset($_GET['p']) && !empty($_GET['p'])) {
 	$page = $_GET['p'];
 }
 else {
-	$page = 'books.index';
+	$page = 'books.home';
 }
 
-$page = explode('.', $page);
-$controler = 'blog\controler\\' . ucfirst($page[0]) . 'Controler';
-$action = $page[1];
+var_dump($page);
+$parts = explode('.', $page);
 
-if(isset($page[2])) {
-	$action = $page[2];
+if($page === 'admin.index') {
+	$controler = 'blog\controler\admin\\' . ucfirst($parts[0]) . 'Controler';
+	$action = $parts[1];
 }
+elseif($parts[0] === 'admin') {
+	$controler = 'blog\controler\admin\\' . ucfirst($parts[0]) . ucfirst($parts[1]) . 'Controler';
+	$action = $parts[2];
+}
+else {
+	$controler = 'blog\controler\\' . ucfirst($parts[0]) . 'Controler';
+	$action = $parts[1];
+}
+
 
 
 var_dump($controler, $action);

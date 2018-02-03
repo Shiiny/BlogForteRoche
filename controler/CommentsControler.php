@@ -19,10 +19,10 @@ class CommentsControler extends Controler {
 			$result = $this->comment->create([
 				'author' => $_SESSION['auth']->username,
 				'comment' => $_POST['comment'],
-				'post_id' => $_GET['id']
+				'chapter_id' => $_GET['id']
 			]);
 			if($result) {
-				header('Location: index.php?p=posts.single&id='. $_GET['id']);
+				header('Location: index.php?p=chapters.single&id='. $_GET['id']);
 			}
 		}
 	}
@@ -34,7 +34,7 @@ class CommentsControler extends Controler {
 				'comment' => $_POST['comment']
 			]);
 			if($result) {
-				header('Location: index.php?p=posts.single&id='. $comment->post_id);
+				header('Location: index.php?p=chapters.single&id='. $comment->chapter_id);
 			}	
 		}
 		$form = new BootstrapForm($comment);

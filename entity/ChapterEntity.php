@@ -4,7 +4,7 @@ namespace blog\entity;
 
 use blog\entity\Entity;
 
-class ChaptersEntity extends Entity {
+class ChapterEntity extends Entity {
 	
 	public function getUrl() {
 		return 'index.php?p=chapters.single&id=' . $this->id;

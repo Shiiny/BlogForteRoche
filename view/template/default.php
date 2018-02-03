@@ -47,6 +47,7 @@
             <li class="active"><a href="index.php?p=users.register">S'inscrire</a></li>  
             <li><a href="?p=users.login">Se connecter</a></li>
             <?php endif; ?>
+            <li><a href="?p=books.index">Les romans</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

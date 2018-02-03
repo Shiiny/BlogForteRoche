@@ -12,8 +12,32 @@ class Book extends Manager {
 	*	@return array
 	*/
 	public function lastBook() {
-		return $this->requete("SELECT * FROM {$this->table} ORDER BY release_date DESC", null, true);
+		return $this->requete("SELECT books.id, books.title, books.content, books.release_date, categories.title as category FROM {$this->table} LEFT JOIN categories ON category_id = categories.id ORDER BY release_date DESC", null, true);
 	}
 
-	
+	/**	
+	*	Récupère tous les books avec leur catégorie associé.
+	*	@return array
+	*/
+	public function allBooks() {
+		return $this->requete("SELECT books.id, books.title, books.content, books.release_date, categories.title as category FROM {$this->table} LEFT JOIN categories ON category_id = categories.id ORDER BY release_date DESC");
+	}
+
+	/**	
+	*	Récupère les books de la catégorie demandée.
+	*	@param int $category_id
+	*	@return array
+	*/
+	public function byCategory($category_id) {
+		return $this->requete("SELECT books.id, books.title, books.content, books.release_date, categories.title as category FROM {$this->table} LEFT JOIN categories ON category_id = categories.id WHERE category_id = ? ORDER BY release_date DESC", [$category_id]);
+	}
+
+	/**	
+	*	Récupère les books de la catégorie demandée.
+	*	@param int $category_id
+	*	@return array
+	*/
+	public function find($id) {
+		return $this->requete("SELECT books.id, books.title, books.content, books.release_date, books.category_id, categories.title as category FROM {$this->table} LEFT JOIN categories ON category_id = categories.id WHERE books.id = ? ORDER BY release_date DESC", [$id], true);
+	}
 }

@@ -12,35 +12,41 @@ class BooksControler extends Controler {
 		parent::__construct();
 		$this->loadModel('book');
 		$this->loadModel('chapter');
+		$this->loadModel('category');
+	}
+
+	public function home() {
+		$book = $this->book->lastBook();
+		$chapters = $this->chapter->allChapters($book->id);
+		$categories = $this->category->all();
+		
+		$this->render('books.home', compact('book', 'chapters', 'categories'));
 	}
 
 	public function index() {
-		$book = $this->book->lastBook();
-		$chapters = $this->chapter->allChapters($book->id);
-		var_dump($chapters);
-		
-		$this->render('books.index', compact('book', 'chapters'));
+		$books = $this->book->allBooks();
+
+		$this->render('books.index', compact('books'));
 	}
-/*
+
 	public function category() {
 		$categorie = $this->category->find($_GET['id']);
 		if($categorie === false) {
 			$this->notFound();
 		}
-		$posts = $this->post->byCategory($_GET['id']);
+		$books = $this->book->byCategory($_GET['id']);
 		$listCategories = $this->category->all();
-		$this->render('posts.category', compact('categorie', 'posts', 'listCategories'));
+		$this->render('books.category', compact('categorie', 'books', 'listCategories'));
 	}
 
-	public function single($app) {
-		$post = $this->post->findWithCategory($_GET['id']);
-		$comments = $this->comment->byComment($_GET['id']);
-		if ($post === false) {
+	public function single() {
+		$book = $this->book->find($_GET['id']);
+		$chapters = $this->chapter->allChapters($book->id);
+		$categories = $this->category->all();
+		if ($book === false) {
 			$this->notFound();
 		}
 
-		$app->title = $post->title;
-		$form = new BootstrapForm($_POST);
-		$this->render('posts.single', compact('post', 'app', 'comments', 'form'));
-	}*/
+		$this->render('books.single', compact('chapters', 'book', 'categories'));
+	}
 }
