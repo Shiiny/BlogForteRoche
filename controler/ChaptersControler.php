@@ -24,11 +24,12 @@ class ChaptersControler extends Controler {
 			$this->notFound();
 		}
 		$book = $this->book->find($chapter->book_id);
+		$listbooks = $this->book->allBooks();
 		$listChapters = $this->chapter->allChapters($chapter->book_id);
 		$comments = $this->comment->byComment($chapter->id);
 		$app->title = $chapter->chapter_title;
 		
 		$form = new BootstrapForm($_POST);
-		$this->render('chapters.single', compact('chapter', 'app', 'listChapters', 'comments', 'book', 'form'));
+		$this->render('chapters.single', compact('chapter', 'app', 'listChapters', 'comments', 'book', 'listbooks', 'form'));
 	}
 }

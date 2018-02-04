@@ -13,7 +13,7 @@ class Comment extends Manager{
 	*	@return array
 	*/
 	public function byComment($chapter_id) {
-		return $this->requete("SELECT comments.id, comments.author, comments.comment, comments.comment_date FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id WHERE chapters.id = ? ", [$chapter_id]);
+		return $this->requete("SELECT comments.id, comments.author, comments.comment, comments.chapter_id, comments.report, comments.comment_date FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id WHERE chapters.id = ? ", [$chapter_id]);
 	}
 
 	/**	
@@ -38,6 +38,6 @@ class Comment extends Manager{
 	 * @return array
 	 **/
 	public function all() {
-		return $this->requete("SELECT comments.id, comments.author, comments.comment, comments.comment_date, chapters.chapter_title FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id ORDER BY chapters.chapter_title DESC");
+		return $this->requete("SELECT comments.id, comments.author, comments.comment, comments.comment_date, comments.report, chapters.chapter_title FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id ORDER BY chapters.chapter_title DESC");
 	}
 }

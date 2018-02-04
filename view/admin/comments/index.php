@@ -10,6 +10,7 @@
 				<td>Auteur</td>
 				<td>Commentaire</td>
 				<td>Dernière modification</td>
+				<td>Report</td>
 				<td>Chapitre associé</td>
 				<td>Actions</td>
 			</tr>
@@ -20,6 +21,7 @@
 					<td><?= $comment->author; ?></td>
 					<td class="content"><?= $comment->getExtrait(); ?></td>
 					<td class="item-info"><?= $comment->comment_date; ?></td>
+					<td><?= $comment->report; ?></td>
 					<td class="item-info"><?= $comment->chapter_title; ?></td>
 					<td>
 						<a href="?p=admin.comments.edit&id=<?= $comment->id; ?>" class="btn btn-primary"><i class="fas fa-edit"></i></a>
