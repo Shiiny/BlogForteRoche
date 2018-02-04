@@ -12,7 +12,6 @@ else {
 	$page = 'books.home';
 }
 
-var_dump($page);
 $parts = explode('.', $page);
 
 if($page === 'admin.index') {
@@ -30,6 +29,5 @@ else {
 
 
 
-var_dump($controler, $action);
 $controler = new $controler();
 $controler->$action(App::getInstance());

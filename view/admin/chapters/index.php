@@ -1,7 +1,5 @@
 <?php require('../view/admin/menu.php'); ?>
-
 	<h1>Administrer les chapitres</h1>
-
 	<p>
 		<a href="?p=admin.chapters.add" class="btn btn-success">Ajouter</a>
 	</p>
@@ -11,6 +9,7 @@
 			<tr>
 				<td>ID</td>
 				<td>Titre</td>
+				<td>Livre</td>
 				<td>Dernière modification</td>
 				<td>Actions</td>
 			</tr>
@@ -19,8 +18,9 @@
 			<?php foreach ($chapters as $chapter): ?>
 				<tr>
 					<td><?= $chapter->id; ?></td>
+					<td><?= $chapter->chapter_title; ?></td>
 					<td><?= $chapter->title; ?></td>
-					<td class="item"><?= $chapter->dateAdd; ?></td>
+					<td class="item"><?= $chapter->chapter_release; ?></td>
 					<td>
 						<a href="<?= $chapter->getUrl(); ?>" class="btn-default"><i class="fas fa-eye" aria-hidden="true"></i></a>
 						<a href="?p=admin.chapters.edit&id=<?= $chapter->id; ?>" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i></a>

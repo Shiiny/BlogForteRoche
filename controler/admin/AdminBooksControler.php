@@ -3,8 +3,6 @@
 namespace blog\controler\admin;
 
 use blog\controler\admin\AdminControler;
-use \App;
-use blog\Auth\DBAuth;
 use blog\html\BootstrapForm;
 
 class AdminBooksControler extends AdminControler {
@@ -62,11 +60,12 @@ class AdminBooksControler extends AdminControler {
 		if(!empty($_POST)) {
 			$book = $this->book->find($_POST['id']);
 			$chapters = $this->chapter->allChapters($book->id);
-			$req = $this->book->delete($_POST['id']);
-			$res = $this->chapter->deleteChapter($_POST['id']);
+
 			foreach ($chapters as $chapter) {
-				$rep = $this->comment->deleteComment($chapter->id);
+				$sup = $this->comment->deleteComment($chapter->id);
 			}
+			$sup = $this->chapter->deleteChapter($_POST['id']);
+			$sup = $this->book->delete($_POST['id']);
 		}
 		header('Location: ?p=admin.books.index');
 	}

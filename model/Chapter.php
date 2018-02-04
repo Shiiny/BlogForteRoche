@@ -16,12 +16,12 @@ class Chapter extends Manager {
 	}
 
 	/**
-	 * Récupère tous les articles
+	 * Récupère tous les chapitres en liant le titre du livre
 	 * @return array
-	 *
+	 **/
 	public function all() {
-		return $this->requete("SELECT * FROM {$this->table} ORDER BY chapter_release DESC");
-	}*/
+		return $this->requete("SELECT chapters.id, chapter_title, chapter_content, chapter_release, books.title FROM {$this->table} LEFT JOIN books ON chapters.book_id = books.id ORDER BY books.title DESC");
+	}
 
 	/**	
 	*	Récupère un article en liant la catégorie associée.

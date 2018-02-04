@@ -1,8 +1,7 @@
 <?php require('../view/admin/menu.php'); ?>
-
 	<h1>Administrer les commentaires</h1>
 	<p>
-		<a href="?p=admin.comments.addComment" class="btn btn-success">Ajouter</a>
+		<a href="?p=admin.comments.add" class="btn btn-success">Ajouter</a>
 	</p>
 
 	<table class="table">
@@ -11,7 +10,7 @@
 				<td>Auteur</td>
 				<td>Commentaire</td>
 				<td>Dernière modification</td>
-				<td>Article associé</td>
+				<td>Chapitre associé</td>
 				<td>Actions</td>
 			</tr>
 		</thead>
@@ -21,9 +20,9 @@
 					<td><?= $comment->author; ?></td>
 					<td class="content"><?= $comment->getExtrait(); ?></td>
 					<td class="item-info"><?= $comment->comment_date; ?></td>
-					<td class="item-info"><?= $comment->title; ?></td>
+					<td class="item-info"><?= $comment->chapter_title; ?></td>
 					<td>
-						<a href="?p=admin.comments.editComment&id=<?= $comment->id; ?>" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+						<a href="?p=admin.comments.edit&id=<?= $comment->id; ?>" class="btn btn-primary"><i class="fas fa-edit"></i></a>
 						<form action="?p=admin.comments.delete" method="post" style="display: inline;">
 							<input type="hidden" name="id" value="<?= $comment->id; ?>">
 							<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>

@@ -32,4 +32,12 @@ class Comment extends Manager{
 	public function deleteComment($chapter_id) {
 		return $this->requete("DELETE FROM {$this->table} WHERE chapter_id = ?", [$chapter_id]);
 	}
+
+	/**
+	 * Récupère tous les commentaires en liant le titre du chapitre
+	 * @return array
+	 **/
+	public function all() {
+		return $this->requete("SELECT comments.id, comments.author, comments.comment, comments.comment_date, chapters.chapter_title FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id ORDER BY chapters.chapter_title DESC");
+	}
 }

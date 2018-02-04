@@ -62,6 +62,10 @@ ul#admin-menu {
     color: #ffffff;
 }
 
+#adminbody {
+    padding-top: 20px;
+}
+
 .btn-success {
     font-weight: 700;
     background-color: #78ab4e;
