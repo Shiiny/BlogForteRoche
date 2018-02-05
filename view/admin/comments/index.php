@@ -21,7 +21,8 @@
 					<td><?= $comment->author; ?></td>
 					<td class="content"><?= $comment->getExtrait(); ?></td>
 					<td class="item-info"><?= $comment->comment_date; ?></td>
-					<td><?= $comment->report; ?></td>
+					<td><a id="tag" href="?p=admin.reports.index&id=<?= $comment->id; ?>"><?= $comment->report; ?></a>
+					</td>
 					<td class="item-info"><?= $comment->chapter_title; ?></td>
 					<td>
 						<a href="?p=admin.comments.edit&id=<?= $comment->id; ?>" class="btn btn-primary"><i class="fas fa-edit"></i></a>

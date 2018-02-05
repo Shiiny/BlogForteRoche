@@ -8,11 +8,12 @@ class User extends Manager {
 	protected $table;
 
 	public function allUsers() {
-		return $this->requete("SELECT * FROM {$this->table} LEFT JOIN roles ON users.role_id = roles.role_id WHERE confirmed_at IS NOT NULL");
+		return $this->requete("SELECT users.id, users.username, users.role_id, users.password, users.email, users.confirmation_token, DATE_FORMAT(confirmed_at, '%d/%m/%Y %H:%i:%s') AS date_at, users.reset_token, users.reset_at, users.remember, roles.rang FROM {$this->table} LEFT JOIN roles ON users.role_id = roles.role_id WHERE confirmed_at IS NOT NULL");
+
 	}
 
 	public function userRecent() {
-		return $this->requete("SELECT * FROM {$this->table} WHERE confirmed_at IS NOT NULL ORDER BY confirmed_at DESC", null, true);
+		return $this->requete("SELECT users.id, users.username, users.role_id, users.password, users.email, users.confirmation_token, DATE_FORMAT(confirmed_at, '%d/%m/%Y %H:%i:%s') AS date_at, users.reset_token, users.reset_at, users.remember FROM {$this->table} WHERE confirmed_at IS NOT NULL ORDER BY confirmed_at DESC", null, true);
 	}
 
 	public function isUniq($field, $value) {

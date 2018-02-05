@@ -20,7 +20,15 @@ var comment = {
 		});
 	}
 
+	tagComment : function() {
+		var tag = $('#tag');
+		if (tag> 0) {
+			tag.addClass('tag_comment');
+		}
+	}
+
 }
 
 comment.addComment();
 comment.closeComment();
+comment.tagComment();

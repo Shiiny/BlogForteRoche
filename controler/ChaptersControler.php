@@ -13,6 +13,7 @@ class ChaptersControler extends Controler {
 		$this->loadModel('book');
 		$this->loadModel('chapter');
 		$this->loadModel('comment');
+		$this->loadModel('report');
 	}
 
 	public function single($app) {

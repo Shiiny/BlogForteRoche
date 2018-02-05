@@ -13,6 +13,7 @@ class AdminCommentsControler extends AdminControler {
 		$this->loadModel('book');
 		$this->loadModel('chapter');
 		$this->loadModel('comment');
+		$this->loadModel('report');
 	}
 
 	public function index() {
@@ -56,6 +57,7 @@ class AdminCommentsControler extends AdminControler {
 
 	public function delete() {
 		if(!empty($_POST)) {
+			$sup = $this->report->deleteReport($_POST['id']);
 			$sup = $this->comment->delete($_POST['id']);
 		}
 		header('Location: ?p=admin.comments.index');

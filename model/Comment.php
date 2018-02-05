@@ -13,7 +13,16 @@ class Comment extends Manager{
 	*	@return array
 	*/
 	public function byComment($chapter_id) {
-		return $this->requete("SELECT comments.id, comments.author, comments.comment, comments.chapter_id, comments.report, comments.comment_date FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id WHERE chapters.id = ? ", [$chapter_id]);
+		return $this->requete("SELECT comments.id, comments.author, comments.comment, comments.chapter_id, comments.report, DATE_FORMAT(comment_date, '%d/%m/%Y %H:%i:%s') AS comment_date FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id WHERE chapters.id = ? ", [$chapter_id]);
+	}
+
+	/**	
+	*	Récupère le commentaires identifié par le report associé.
+	*	@param [int] $comment_id
+	*	@return boolean
+	*/
+	public function byReport($report_id) {
+		return $this->requete("SELECT comments.id, comments.author, comments.comment, comments.chapter_id, comments.report, DATE_FORMAT(comment_date, '%d/%m/%Y %H:%i:%s') AS comment_date, reports.comment_id FROM {$this->table} LEFT JOIN reports ON reports.comment_id = comments.id WHERE reports.id = ? ", [$report_id], true);
 	}
 
 	/**	
@@ -21,7 +30,7 @@ class Comment extends Manager{
 	*	@return array
 	*/
 	public function allBychapter() {
-		return $this->requete("SELECT comments.id, comments.author, comments.comment, comments.comment_date, chapters.title FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id ORDER BY chapters.title");
+		return $this->requete("SELECT comments.id, comments.author, comments.comment, DATE_FORMAT(comment_date, '%d/%m/%Y %H:%i:%s') AS comment_date, chapters.title FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id ORDER BY chapters.title");
 	}
 
 	/**	
@@ -38,6 +47,6 @@ class Comment extends Manager{
 	 * @return array
 	 **/
 	public function all() {
-		return $this->requete("SELECT comments.id, comments.author, comments.comment, comments.comment_date, comments.report, chapters.chapter_title FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id ORDER BY chapters.chapter_title DESC");
+		return $this->requete("SELECT comments.id, comments.author, comments.comment, DATE_FORMAT(comment_date, '%d/%m/%Y %H:%i:%s') AS comment_date, comments.report, chapters.chapter_title FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id ORDER BY chapters.chapter_title DESC");
 	}
 }

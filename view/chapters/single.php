@@ -33,10 +33,9 @@
 			<?php if($app->getSession()->getAllow('username', $comment->author)): ?>
 			<a href="?p=comments.editComment&id=<?= $comment->id; ?>" class="btn btn-info"><i class="fas fa-edit" aria-hidden="true"></i> Editer</a>
 			<?php endif;?>
-			<?php if($comment->report == 0): ?>
-			<a href="?p=comments.reportComment&id=<?= $comment->id; ?>&chapter=<?= $comment->chapter_id; ?>">Signaler ce commentaire</a>
-			<?php endif; ?>
-		</div>		
+			<a href="?p=comments.reportComment&id=<?= $comment->id; ?>">Signaler ce commentaire</a>
+
+		</div>
 		<?php endif; ?>
 
 	</div>

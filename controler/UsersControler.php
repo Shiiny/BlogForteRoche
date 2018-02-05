@@ -30,8 +30,7 @@ class UsersControler extends Controler {
 		}
 		if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) {
 			$user = $app->getAuth()->login($_POST['username'], $_POST['password'], isset($_POST['remember']), $app);
-
-			if($user) {
+			if($user && $user->slug !== 'ban') {
 				$app->getSession()->setFlash('success', "Vous êtes connecté");
 				$app->redirect('index.php?p=users.account');
 			}
@@ -100,7 +99,8 @@ class UsersControler extends Controler {
 
 	public function account($app) {
 		$app->getAuth()->allow('member');
-		$this->render('users.account', compact(''));
+
+		$this->render('users.account');
 	}
 
 	public function logout($app) {

@@ -15,7 +15,7 @@
 						<td><?= $users->id; ?></td>
 						<td><?= $users->username; ?></td>
 						<td><?= $users->email; ?></td>
-						<td><?= $users->confirmed_at; ?></td>		
+						<td><?= $users->date_at; ?></td>		
 					</tr>
 			</tbody>
 		</table>

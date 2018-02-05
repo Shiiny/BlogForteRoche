@@ -26,7 +26,7 @@ class Auth {
 		return substr(str_shuffle(str_repeat($alphabet, $lenght)), 0, $lenght);
 	}
 
-	public function logged($field = false, $key = false) {
+	public function logged() {
 		if(!$this->session->read('auth')) {
 			return false;
 		}
@@ -112,18 +112,28 @@ class Auth {
 			$this->session->setFlash('danger', "Vous n'avez pas le droit d'accéder à cette page");
 			$this->app->redirect('index.php?p=users.login');
 		}
+		return true;
 	}
 
 	public function allow($rang) {
+		$this->restrict();
+
 		$roles = [];
 		$data = $this->app->getModelClass('user')->allRoles();
 		foreach ($data as $key) {
 			$roles[$key->slug] = $key->level;
 		}
-		if($roles[$rang] > $this->session->setInfo('level')) {
+				
+		if($this->session->setInfo('level') == 0) {
+			setcookie('remember', NULL, -1);
+			$this->session->destroy('auth');
+			$this->session->setFlash('danger', 'Votre compte a été banni');
+
+			$this->app->redirect('index.php');
+		}
+		elseif($roles[$rang] > $this->session->setInfo('level')) {
 			$this->session->setFlash('danger', "Vous n'avez pas le droit d'accéder à cette page");
 			$this->app->redirect('index.php?p=users.login');
 		}
-		$this->restrict();
 	}
 }
