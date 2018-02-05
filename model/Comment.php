@@ -49,4 +49,12 @@ class Comment extends Manager{
 	public function all() {
 		return $this->requete("SELECT comments.id, comments.author, comments.comment, DATE_FORMAT(comment_date, '%d/%m/%Y %H:%i:%s') AS comment_date, comments.report, chapters.chapter_title FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id ORDER BY chapters.chapter_title DESC");
 	}
+
+	/**
+	 * Récupère tous les commentaires en liant le titre du chapitre
+	 * @return array
+	 **/
+	public function treeLast() {
+		return $this->requete("SELECT comments.id, comments.author, comments.comment, DATE_FORMAT(comment_date, '%d/%m/%Y %H:%i:%s') AS release_comment, comments.report, chapters.chapter_title FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id ORDER BY comment_date DESC LIMIT 0,3");
+	}
 }
