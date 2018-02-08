@@ -6,7 +6,6 @@
 		<thead>
 			<tr>
 				<td>Utilisateur</td>
-				<td>Commentaire</td>
 				<td>Date du report</td>
 				<td>Actions</td>
 			</tr>
@@ -15,7 +14,6 @@
 			<?php foreach ($reports as $report): ?>
 			<tr class="report">
 				<td><?= $report->author_report; ?></td>
-				<td class="content"></td>
 				<td class="item-info"><?= $report->report_release; ?></td>
 				<td>
 					<a href="?p=admin.comments.edit&id=<?= $report->comment_id; ?>" class="btn btn-primary"><i class="fas fa-edit"></i></a>

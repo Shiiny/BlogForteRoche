@@ -22,7 +22,7 @@ class AdminUsersControler extends AdminControler {
 
 	public function rang() {
 		if(!empty($_POST)) {
-			$result = $this->user->update($_GET['id'], [
+			$result = $this->user->updateUser($_GET['id'], [
 				'role_id' => $_POST['rang_id']
 			]);
 			if($result) {

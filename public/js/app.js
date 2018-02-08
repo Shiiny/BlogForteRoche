@@ -18,10 +18,11 @@ var comment = {
 			$('#formComment').hide();
 			$('#addComment').show();
 		});
-	}
+	},
 
 	tagComment : function() {
 		var tag = $('#tag');
+		console.log(tag);
 		if (tag> 0) {
 			tag.addClass('tag_comment');
 		}

@@ -7,9 +7,21 @@ use blog\model\Manager;
 class User extends Manager {
 	protected $table;
 
+
+	public function updateUser($id, $fields) {
+		$sql_fields = [];
+		$attributes = [];
+		foreach ($fields as $key => $value) {
+			$sql_fields[] = "$key = ?";
+			$attributes[] = $value;
+		}
+		$attributes[] = $id;
+		$sql_field = implode(', ', $sql_fields);
+		return $this->requete("UPDATE {$this->table} SET $sql_field WHERE id = ?", $attributes, true);
+	}
+
 	public function allUsers() {
 		return $this->requete("SELECT users.id, users.username, users.role_id, users.password, users.email, users.confirmation_token, DATE_FORMAT(confirmed_at, '%d/%m/%Y %H:%i:%s') AS date_at, users.reset_token, users.reset_at, users.remember, roles.rang FROM {$this->table} LEFT JOIN roles ON users.role_id = roles.role_id WHERE confirmed_at IS NOT NULL");
-
 	}
 
 	public function userRecent() {
@@ -25,7 +37,8 @@ class User extends Manager {
 	}
 
 	public function insertUser($username, $password, $email, $token) {
-		return $this->requete("INSERT INTO {$this->table} SET username = ?, password = ?, email = ?, confirmation_token = ?", [$username, $password, $email, $token], true);
+		$role_id = 2;
+		return $this->requete("INSERT INTO {$this->table} SET username = ?, role_id = ?, password = ?, email = ?, confirmation_token = ?", [$username, $role_id, $password, $email, $token], true);
 	}
 
 	public function byUserId($user_id) {

@@ -24,11 +24,12 @@ class AdminBooksControler extends AdminControler {
 
 	public function add() {
 		if(!empty($_POST)) {
+			var_dump($_POST);
 			$result = $this->book->create([
 				'title' => $_POST['title'],
 				'content' => $_POST['content'],
 				'category_id' => $_POST['category_id']
-			]);
+			], 'release_date');
 			if($result) {
 				return $this->index();
 			}
@@ -44,7 +45,7 @@ class AdminBooksControler extends AdminControler {
 				'title' => $_POST['title'],
 				'content' => $_POST['content'],
 				'category_id' => $_POST['category_id']
-			]);
+			], 'release_date');
 			if($result) {
 				return $this->index();
 			}

@@ -86,6 +86,7 @@ class Auth {
 		$app->getModelClass('user')->insertUser($username, $password, $email, $token);
 		$user_id = $this->db->lastInsertId();
 		$mail_msg = "Afin de valider votre compte merci de cliquer sur ce lien\n\nhttp://localhost/BlogForteRoche/public/index.php?p=users.confirm&id=$user_id&token=$token";
+		//$mail_msg = "Afin de valider votre compte merci de cliquer sur ce lien\n\nhttp://blogforteroche.web-shiny.fr/index.php?p=users.confirm&id=$user_id&token=$token";
 		mail($email, "Confirmation de votre compte", $mail_msg);
 	}
 
@@ -94,7 +95,8 @@ class Auth {
 		if($user) {
 			$reset_token = $this->tokenRandom(60);
 			$app->getModelClass('user')->updateToken($reset_token, $user->id);
-			$mail_msg = "Cliquez sur ce lien\n\nhttp://localhost/BlogForteRoche/public/index.php?p=users.reset&id={$user->id}&token=$reset_token\n\nPour réinitailiser votre mot de passe";
+			$mail_msg = "Afin de valider votre compte merci de cliquer sur ce lien\n\nhttp://localhost/BlogForteRoche/public/index.php?p=users.reset&id={$user->id}&token=$reset_token\n\nPour réinitailiser votre mot de passe";
+			//$mail_msg = "Cliquez sur ce lien\n\nhttp://blogforteroche.web-shiny.fr/index.php?p=users.reset&id={$user->id}&token=$reset_token\n\nPour réinitailiser votre mot de passe";
 			mail($email, "Demande de réinitialisation", $mail_msg);
 			return $user;
 		}

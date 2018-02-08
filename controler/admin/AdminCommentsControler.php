@@ -28,7 +28,7 @@ class AdminCommentsControler extends AdminControler {
 				'author' => $_SESSION['auth']->username,
 				'comment' => $_POST['comment'],
 				'chapter_id' => $_POST['chapter_id']
-			]);
+			], 'comment_date');
 			if($result) {
 				return $this->index();
 			}
@@ -43,7 +43,7 @@ class AdminCommentsControler extends AdminControler {
 			$result = $this->comment->update($_GET['id'], [
 				'comment' => $_POST['comment'],
 				'chapter_id' => $_POST['chapter_id']
-			]);
+			], 'comment_date');
 			if($result) {
 				return $this->index();
 			}

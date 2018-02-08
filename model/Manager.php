@@ -45,7 +45,7 @@ class Manager {
 		return $this->requete("SELECT * FROM {$this->table} WHERE id = ?", [$id], true);
 	}
 
-	public function update($id, $fields) {
+	public function update($id, $fields, $release_date = false) {
 		$sql_fields = [];
 		$attributes = [];
 		foreach ($fields as $key => $value) {
@@ -54,10 +54,10 @@ class Manager {
 		}
 		$attributes[] = $id;
 		$sql_field = implode(', ', $sql_fields);
-		return $this->requete("UPDATE {$this->table} SET $sql_field WHERE id = ?", $attributes, true);
+		return $this->requete("UPDATE {$this->table} SET $sql_field, $release_date = NOW() WHERE id = ?", $attributes, true);
 	}
 
-	public function create($fields) {
+	public function create($fields, $release_date = false) {
 		$sql_fields = [];
 		$attributes = [];
 		foreach ($fields as $key => $value) {
@@ -65,7 +65,7 @@ class Manager {
 			$attributes[] = $value;
 		}
 		$sql_field = implode(', ', $sql_fields);
-		return $this->requete("INSERT INTO {$this->table} SET $sql_field", $attributes, true);
+		return $this->requete("INSERT INTO {$this->table} SET $sql_field, $release_date = NOW()", $attributes, true);
 	}
 
 	public function delete($id) {

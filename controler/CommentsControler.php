@@ -21,13 +21,15 @@ class CommentsControler extends Controler {
 				'author' => $_SESSION['auth']->username,
 				'comment' => $_POST['comment'],
 				'chapter_id' => $_GET['id']
-			]);
+			], 'comment_date');
 			if($result) {
 				header('Location: ?p=chapters.single&id='. $_GET['id']);
 			}
 		}
-		$app->getSession()->setFlash('warning', "Vous n'avez pas saisie de commentaire");
-		header('Location: ?p=chapters.single&id='. $_GET['id']);
+		else {
+			$app->getSession()->setFlash('warning', "Vous n'avez pas saisie de commentaire");
+			header('Location: ?p=chapters.single&id='. $_GET['id']);
+		}
 	}
 
 	public function editComment() {

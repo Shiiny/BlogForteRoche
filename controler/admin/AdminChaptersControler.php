@@ -28,7 +28,7 @@ class AdminChaptersControler extends AdminControler {
 				'chapter_title' => $_POST['chapter_title'],
 				'chapter_content' => $_POST['chapter_content'],
 				'book_id' => $_POST['book_id']
-			]);
+			], 'chapter_release');
 			if($result) {
 				return $this->index();
 			}
@@ -44,7 +44,7 @@ class AdminChaptersControler extends AdminControler {
 				'chapter_title' => $_POST['chapter_title'],
 				'chapter_content' => $_POST['chapter_content'],
 				'book_id' => $_POST['book_id']
-			]);
+			], 'chapter_release');
 			if($result) {
 				return $this->index();
 			}
