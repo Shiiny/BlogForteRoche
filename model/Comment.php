@@ -12,8 +12,8 @@ class Comment extends Manager{
 	*	@param [int] $chapter_id
 	*	@return array
 	*/
-	public function byComment($chapter_id) {
-		return $this->requete("SELECT comments.id, comments.author, comments.comment, comments.chapter_id, comments.report, DATE_FORMAT(comment_date, '%d/%m/%Y %H:%i:%s') AS comment_date FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id WHERE chapters.id = ? ", [$chapter_id]);
+	public function byComment($chapter_id, $currentPage, $perPage) {
+		return $this->requete("SELECT comments.id, comments.author, comments.comment, comments.chapter_id, comments.report, DATE_FORMAT(comment_date, '%d/%m/%Y %H:%i:%s') AS comment_date FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id WHERE chapters.id = ? ORDER BY comment_date DESC LIMIT ".(($currentPage-1)*$perPage)." , $perPage", [$chapter_id]);
 	}
 
 	/**	
@@ -54,7 +54,7 @@ class Comment extends Manager{
 	 * Récupère tous les commentaires en liant le titre du chapitre
 	 * @return array
 	 **/
-	public function treeLast() {
+	public function threeLast() {
 		return $this->requete("SELECT comments.id, comments.author, comments.comment, DATE_FORMAT(comment_date, '%d/%m/%Y %H:%i:%s') AS release_comment, comments.report, chapters.chapter_title FROM {$this->table} LEFT JOIN chapters ON chapters.id = chapter_id ORDER BY comment_date DESC LIMIT 0,3");
 	}
 }

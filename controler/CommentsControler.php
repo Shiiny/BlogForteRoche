@@ -37,7 +37,7 @@ class CommentsControler extends Controler {
 		if(!empty($_POST)) {
 			$result = $this->comment->update($_GET['id'], [
 				'comment' => $_POST['comment']
-			]);
+			], 'comment_date');
 			if($result) {
 				header('Location: ?p=chapters.single&id='. $comment->chapter_id);
 			}	
@@ -53,11 +53,11 @@ class CommentsControler extends Controler {
 		if(!$req) {
 			$token_report = $comment->report +1;
 
-			$result = $this->comment->update($_GET['id'], ['report' => $token_report]);
+			$result = $this->comment->update($_GET['id'], ['report' => $token_report], 'release_report');
 			$report = $this->report->create([
 				'author_report' => $_SESSION['auth']->username,
 				'comment_id' => $_GET['id']
-			]);
+			], 'report_release');
 
 			if($result) {
 				$app->getSession()->setFlash('warning', "Vous venez de reporter ce message");

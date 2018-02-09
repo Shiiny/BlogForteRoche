@@ -8,6 +8,7 @@ use \App;
 
 class ChaptersControler extends Controler {
 
+
 	public function __construct() {
 		parent::__construct();
 		$this->loadModel('book');
@@ -27,10 +28,21 @@ class ChaptersControler extends Controler {
 		$book = $this->book->find($chapter->book_id);
 		$listbooks = $this->book->allBooks();
 		$listChapters = $this->chapter->allChapters($chapter->book_id);
-		$comments = $this->comment->byComment($chapter->id);
+
+		$nbPage = $this->pager('chapter_id', $chapter->id);
+				
+		if(isset($_GET['commentPage']) && $_GET['commentPage'] > 0 && $_GET['commentPage'] <= $nbPage) {
+			$currentPage = $_GET['commentPage'];
+		}
+		else {
+			$currentPage = 1;
+		}
+
+		$comments = $this->comment->byComment($chapter->id, $currentPage, $this->perPage);
+		
 		$app->title = $chapter->chapter_title;
 		
 		$form = new BootstrapForm($_POST);
-		$this->render('chapters.single', compact('chapter', 'app', 'listChapters', 'comments', 'book', 'listbooks', 'form'));
+		$this->render('chapters.single', compact('chapter', 'app', 'listChapters', 'comments', 'book', 'listbooks', 'form', 'nbPage'));
 	}
 }

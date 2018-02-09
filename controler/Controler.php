@@ -8,6 +8,8 @@ class Controler {
 
 	protected $viewPath;
 	protected $template = 'default';
+	protected $perPage = 5;
+
 
 	public function __construct() {
 		$this->viewPath = ROOT . '/view/';
@@ -34,5 +36,14 @@ class Controler {
 	protected function forbidden() {
 		header('HTTP/1.0 403 Forbiden');
 		die('Acces interdit');
+	}
+
+	protected function pager($field, $id) {
+		$data = $this->comment->count($field, $id);
+
+		$nbArt = (int) $data[0]->chapter_id;
+		$nbPage = ceil($nbArt/$this->perPage);
+
+		return $nbPage;
 	}
 }

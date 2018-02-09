@@ -32,4 +32,13 @@ class Chapter extends Manager {
 	public function deleteChapter($book_id) {
 		return $this->requete("DELETE FROM {$this->table} WHERE book_id = ?", [$book_id]);
 	}
+
+	/**	
+	*	Récupère le chapitre identifé par son id
+	*	@param [int] $id
+	*	@return boolean
+	*/
+	public function find($id) {
+		return $this->requete("SELECT chapters.id, chapter_title, chapter_content, DATE_FORMAT(chapter_release, '%d/%m/%Y %H:%i:%s') AS chapter_release, book_id FROM {$this->table} WHERE id = ?", [$id], true);
+	}
 }

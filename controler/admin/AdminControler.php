@@ -20,7 +20,7 @@ class AdminControler extends Controler {
 
 	public function index() {
 		$users = $this->user->userRecent();
-		$comments = $this->comment->treeLast();
+		$comments = $this->comment->threeLast();
 
 		$this->render('admin.index', compact('users', 'comments'));
 	}
