@@ -28,6 +28,12 @@ class BootstrapForm extends Form {
 		if($type === 'textarea') {
 			$input = '<textarea name="'.$name.'" class="form-control">'.$this->getValue($name).'</textarea>';
 		}
+		elseif($type === 'file') {
+			$input = '<input type="'.$type.'" name="'.$name.'" class="form-control">';
+			$preview = '<div class="preview">'.$this->getValue($name).'</div>';		
+
+			return $this->surround($label.$input.$preview);
+		}
 		elseif($type === 'checkbox') {
 			$input = '<input type="'.$type.'" name="'.$name.'" value="'.$value.'">';
 			return $this->surround($input.$label);

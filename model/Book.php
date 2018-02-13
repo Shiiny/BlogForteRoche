@@ -38,6 +38,6 @@ class Book extends Manager {
 	*	@return array
 	*/
 	public function find($id) {
-		return $this->requete("SELECT books.id, books.title, books.content, DATE_FORMAT(books.release_date, '%d/%m/%Y %H:%i:%s') AS release_date, books.category_id, categories.title as category FROM {$this->table} LEFT JOIN categories ON category_id = categories.id WHERE books.id = ? ORDER BY release_date DESC", [$id], true);
+		return $this->requete("SELECT books.id, books.title, books.content, DATE_FORMAT(books.release_date, '%d/%m/%Y %H:%i:%s') AS release_date, books.category_id, categories.title as category, books.img_name FROM {$this->table} LEFT JOIN categories ON category_id = categories.id WHERE books.id = ? ORDER BY release_date DESC", [$id], true);
 	}
 }
