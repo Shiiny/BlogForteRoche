@@ -46,6 +46,13 @@ class BooksControler extends Controler {
 		if ($book === false) {
 			$this->notFound();
 		}
+		//var_dump($book);
+		$rep = "../public/images/";
+		$dir = opendir($rep);
+		while($file = readdir($dir)) {
+			if($book->img_name){}
+			//var_dump($file);
+		}
 
 		$this->render('books.single', compact('chapters', 'book', 'categories'));
 	}

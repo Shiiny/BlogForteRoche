@@ -10,22 +10,47 @@ body {
     color: #404852;
 }
 
+header img {
+    width: 100%;
+}
+
+.header-admin {
+    height: 400px;
+    overflow: hidden;
+}
+
+.bandeau {
+    position: relative;
+    bottom: 500px;
+    opacity: .8;
+}
+
+.intro {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    color: #fff;
+}
+
 .container {
     font-size: 14px;
 }
 
-/*#9e9e9e color indication*/
+.content {
+    padding: 2em 0;
+}
+
+.alert {
+    margin-top: 20px;
+}
 
 .navbar-inverse {
     background-color: #404852;
     border-color: transparent;
 }
 
-.navbar {
-    margin-bottom: 0;
-}
-
-.navbar-inverse .navbar-nav>li>a {
+.navbar-inverse .navbar-nav>li>a,
+.navbar-inverse .navbar-brand {
     color: #a8b6ca;
 }
 

@@ -21,7 +21,12 @@ class Controler {
 
 		require($this->viewPath . str_replace('.', '/', $view) . '.php');
 		$content = ob_get_clean();
-		require($this->viewPath . 'template/' . $this->template . '.php');
+		if(strpos($view, 'admin') === 0 || strpos($view, 'users') === 0) {
+			require($this->viewPath . 'template/template.php');
+		}
+		else {
+			require($this->viewPath . 'template/' . $this->template . '.php');
+		}
 	}
 
 	protected function loadModel($model_name) {

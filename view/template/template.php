@@ -23,16 +23,10 @@
   </head>
 
   <body>
-    <header>
-      <img src="../public/images/alaska.jpg" alt="alaska">
-      <div class="intro">
-        <div class="container">
-          <h1>Bienvenue sur le blog de Jean Forteroche</h1>
-          <p>Vous pourrez consulter ses derniers romans chapitre par chapitre mais aussi échanger ou juste laisser un message via les commentaires</p>
-        </div>
-      </div>
+    <header class="header-admin">
+      <img class="bandeau" src="../public/images/alaska.jpg" alt="alaska">
     </header>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar">-fixed-top
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">

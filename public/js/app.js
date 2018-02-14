@@ -30,8 +30,10 @@ var App = {
 		var input = document.querySelector('input[type=file]');
 		var preview = document.querySelector('.preview');
 
-		//input.style.opacity = 0;
-		input.addEventListener('change', updateImageDisplay);
+		console.log(input);
+		if (input != null) {
+			input.addEventListener('change', updateImageDisplay);
+		}
 
 		function updateImageDisplay() {
 		  
