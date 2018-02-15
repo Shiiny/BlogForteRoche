@@ -42,7 +42,8 @@ h3 {
 }
 
 .content-book {
-    margin-bottom: 20px;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
     border-bottom: .5px solid #e3e3e3;
 }
 

@@ -13,6 +13,9 @@ class UsersControler extends Controler {
 	public function __construct() {
 		parent::__construct();
 		$this->loadModel('user');
+		$this->loadModel('book');
+		$this->loadModel('chapter');
+		$this->loadModel('comment');		
 	}
 
 	public function isValid() {
@@ -99,8 +102,13 @@ class UsersControler extends Controler {
 
 	public function account($app) {
 		$app->getAuth()->allow('member');
+		$user = $app->getSession()->read('auth');
+		var_dump($user);
+		$comments = $this->comment->allCommentByUser($user->username);
+		$chapter = $this->chapter->find();
 
-		$this->render('users.account');
+		var_dump($comments);
+		$this->render('users.account', compact('comments'));
 	}
 
 	public function logout($app) {

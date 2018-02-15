@@ -2,7 +2,7 @@
 	<h2>Tous les romans</h2>
 	<?php foreach($books as $book): ?>
 
-	<div class="row book">
+	<div class="row content-book">
 		<div class="col-sm-3">
 			<?php if($book->img_name != null): ?>
 				<img src="../public/images/upload/<?= $book->img_name; ?>" class="thumbnail cover" alt="">
