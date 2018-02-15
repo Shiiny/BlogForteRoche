@@ -3,7 +3,7 @@
 namespace blog\html;
 
 class Image{
-	private static $dir = "../public/images/";
+	private static $dir = "../public/images/upload/";
 	private static $auth_ext = ['jpg', 'jpeg', 'png', 'gif'];
 	private static $ext;
 	private static $img;
@@ -17,6 +17,15 @@ class Image{
 			move_uploaded_file(self::$img['tmp_name'], self::$dir . $file_name);
 			self::thumbnail(self::$dir . $file_name, self::$dir . "/thumbnail/", $file_name, 215, 112);
 			return $file_name;
+		}
+		else {
+			return false;
+		}
+	}
+
+	static function getImage($img_name) {
+		if($img_name != null) {
+			return $photo = self::$dir . $img_name;
 		}
 		else {
 			return false;

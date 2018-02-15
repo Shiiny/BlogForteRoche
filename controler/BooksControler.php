@@ -4,6 +4,7 @@ namespace blog\controler;
 
 use blog\controler\Controler;
 use blog\html\BootstrapForm;
+use blog\html\Image;
 use \App;
 
 class BooksControler extends Controler {
@@ -18,9 +19,10 @@ class BooksControler extends Controler {
 	public function home() {
 		$book = $this->book->lastBook();
 		$chapters = $this->chapter->allChapters($book->id);
-		$categories = $this->category->all();
+		$photo = Image::getImage($book->img_name);
+
 		
-		$this->render('books.home', compact('book', 'chapters', 'categories'));
+		$this->render('books.home', compact('book', 'photo', 'chapters'));
 	}
 
 	public function index() {
@@ -46,14 +48,9 @@ class BooksControler extends Controler {
 		if ($book === false) {
 			$this->notFound();
 		}
-		//var_dump($book);
-		$rep = "../public/images/";
-		$dir = opendir($rep);
-		while($file = readdir($dir)) {
-			if($book->img_name){}
-			//var_dump($file);
-		}
 
-		$this->render('books.single', compact('chapters', 'book', 'categories'));
+		$photo = Image::getImage($book->img_name);
+
+		$this->render('books.single', compact('chapters', 'book', 'photo', 'categories'));
 	}
 }

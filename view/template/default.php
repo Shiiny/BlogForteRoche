@@ -45,6 +45,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
+            <li><a href="?p=books.index">Les romans</a></li>
+          </ul>
+          <ul class="nav auth navbar-nav">
             <?php if(App::getInstance()->getAuth()->logged()): ?>
               <?php if(App::getInstance()->getSession()->getAllow('slug', 'admin')): ?>
                 <li><a href="?p=admin.index">Admin</a></li>
@@ -55,7 +58,6 @@
             <li class="active"><a href="index.php?p=users.register">S'inscrire</a></li>  
             <li><a href="?p=users.login">Se connecter</a></li>
             <?php endif; ?>
-            <li><a href="?p=books.index">Les romans</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

@@ -23,8 +23,8 @@
   </head>
 
   <body>
-    <header class="header-admin">
-      <img class="bandeau" src="../public/images/alaska.jpg" alt="alaska">
+    <header>
+      <img src="../public/images/banner_alaska.jpg" alt="alaska">
     </header>
     <nav class="navbar navbar-inverse navbar">-fixed-top
       <div class="container">
@@ -39,6 +39,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
+            <li><a href="?p=books.index">Les romans</a></li>
+          </ul>
+          <ul class="nav auth navbar-nav">
             <?php if(App::getInstance()->getAuth()->logged()): ?>
               <?php if(App::getInstance()->getSession()->getAllow('slug', 'admin')): ?>
                 <li><a href="?p=admin.index">Admin</a></li>
@@ -49,7 +52,6 @@
             <li class="active"><a href="index.php?p=users.register">S'inscrire</a></li>  
             <li><a href="?p=users.login">Se connecter</a></li>
             <?php endif; ?>
-            <li><a href="?p=books.index">Les romans</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

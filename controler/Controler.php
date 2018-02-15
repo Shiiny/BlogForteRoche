@@ -21,11 +21,11 @@ class Controler {
 
 		require($this->viewPath . str_replace('.', '/', $view) . '.php');
 		$content = ob_get_clean();
-		if(strpos($view, 'admin') === 0 || strpos($view, 'users') === 0) {
-			require($this->viewPath . 'template/template.php');
+		if(strpos($view, 'books.home') === 0) {
+			require($this->viewPath . 'template/' . $this->template . '.php');
 		}
 		else {
-			require($this->viewPath . 'template/' . $this->template . '.php');
+			require($this->viewPath . 'template/template.php');
 		}
 	}
 

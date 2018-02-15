@@ -1,7 +1,7 @@
 <p><a href="<?= $book->getUrl(); ?>">\ <?= $book->title; ?></a></p>
 
 <div class="row">
-	<div class="col-sm-8">
+	<div class="col-sm-9">
 
 		<div>
 			<h1><?= $chapter->chapter_title; ?></h1>
@@ -44,21 +44,25 @@
 		<?php endfor; endif; ?>
 	</div>
 	
-	<div class="col-sm-4">
-		<h3>Les chapitres :</h3>
-		<ul>
-			<?php foreach($listChapters as $listChapter): ?>
-			<li><a href="<?= $listChapter->getUrl(); ?>"><?= $listChapter->chapter_title; ?></a></li>
-			<?php endforeach; ?>
-		</ul>
+	<div class="col-sm-3">
+		<div class="row">
+			<div id="chapers">
+				<h3>Les chapitres :</h3>
+				<ul>
+					<?php foreach($listChapters as $listChapter): ?>
+					<li><a href="<?= $listChapter->getUrl(); ?>"><?= $listChapter->chapter_title; ?></a></li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+			<div id="oeuvres">
+				<h3>Les Oeuvres :</h3>
+				<ul>
+					<?php foreach($listbooks as $listbook): ?>
+					<li><a href="<?= $listbook->getUrl(); ?>"><?= $listbook->title; ?></a></li>
+				<?php endforeach; ?>
+				</ul>
+			</div>
+		</div>
 	</div>
 
-	<div class="col-sm-4">
-		<h3>Les Oeuvres :</h3>
-		<ul>
-			<?php foreach($listbooks as $listbook): ?>
-			<li><a href="<?= $listbook->getUrl(); ?>"><?= $listbook->title; ?></a></li>
-		<?php endforeach; ?>
-		</ul>
-	</div>
 </div>
