@@ -4,6 +4,7 @@ namespace blog\controler;
 
 use blog\controler\Controler;
 use \App;
+use \IntlDateFormatter;
 use blog\Auth\Auth;
 use blog\html\BootstrapForm;
 
@@ -103,12 +104,11 @@ class UsersControler extends Controler {
 	public function account($app) {
 		$app->getAuth()->allow('member');
 		$user = $app->getSession()->read('auth');
-		var_dump($user);
-		$comments = $this->comment->allCommentByUser($user->username);
-		$chapter = $this->chapter->find();
 
-		var_dump($comments);
-		$this->render('users.account', compact('comments'));
+		$dateFormat = new IntlDateFormatter('fr_FR', NULL, NULL, NULL, NULL, 'dd MMMM yyyy');
+		$comments = $this->comment->allCommentByUser($user->username);
+
+		$this->render('users.account', compact('comments', 'dateFormat'));
 	}
 
 	public function logout($app) {

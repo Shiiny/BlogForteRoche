@@ -130,3 +130,51 @@ ul#admin-menu {
     width: 100%;
     margin-top: 20px;
 }
+
+/*---------------- Account.php --------------------------#78ab4e*/ 
+.all_comment_title {
+    padding: 0 25px;
+    color: #a8b6ca;
+    font-size: 14px;
+    font-weight: 700;
+    background-image: linear-gradient(0deg,#404852 0,#788698);
+    border: 1px solid #404852;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    box-shadow: inset 0 1px 2px rgba(255,221,255,.75);
+}
+
+.all_comment_title h4 {
+    line-height: 51px;
+    margin: 0;
+}
+
+.all_comment_title h4 a {
+    color: #efbb6f;
+}
+
+.all_comment_title h4 a:hover {
+    text-decoration: none;
+    color: #fff;
+    transition: .3s;
+    transition-duration: .3s;
+}
+
+.all_comment_content {
+    border: 1px solid #e0e0e0;
+    background-color: #fff;
+    border-top: none;
+    margin-bottom: 20px;
+}
+
+.all_comment_item {
+    padding: 15px;
+}
+
+.all_comment_book, 
+.all_comment_date {
+    font-size: 12px;    
+    font-weight: 400;
+    color: #767676;
+
+}

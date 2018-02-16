@@ -47,10 +47,10 @@
                 <li><a href="?p=admin.index">Admin</a></li>
               <?php endif; ?>
               <li><a href="?p=users.account">Mon compte</a></li>
-              <li><a href="?p=users.logout">Se déconnecter</a></li>  
+              <li><a href="?p=users.logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>  
             <?php else: ?>
             <li class="active"><a href="index.php?p=users.register">S'inscrire</a></li>  
-            <li><a href="?p=users.login">Se connecter</a></li>
+            <li><a href="?p=users.login"><i class="fas fa-sign-out-alt"></i> Connexion</a></li>
             <?php endif; ?>
           </ul>
         </div><!--/.nav-collapse -->
