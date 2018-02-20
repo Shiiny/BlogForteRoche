@@ -24,6 +24,7 @@
 
   <body>
     <header>
+    <?php if(empty($_GET)): ?>
       <img src="../public/images/alaska.jpg" alt="alaska">
       <div class="intro">
         <div class="container">
@@ -31,16 +32,14 @@
           <p>Vous pourrez consulter ses derniers romans chapitre par chapitre mais aussi échanger ou juste laisser un message via les commentaires</p>
         </div>
       </div>
+    <?php else: ?>
+      <img src="../public/images/banner_alaska.jpg" alt="alaska">   
+    <?php endif; ?>
     </header>
     <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+      <div class="container">          
+        <div class="burger"></div>
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="index.php">Blog Jean Forteroche</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
@@ -73,6 +72,11 @@
       <?php endif; ?>
         <?= $content; ?>
     </div> <!-- /container -->
+
+    <?php if(empty($_GET) || strpos($_GET['p'], 'admin') !== 0): ?>
+      <?php require('../view/template/footer.php'); ?>
+    <?php endif; ?>
+    
     <script src="../public/js/app.js"></script>
   </body>
 </html>

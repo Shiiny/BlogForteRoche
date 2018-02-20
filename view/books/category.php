@@ -1,13 +1,14 @@
 <div class="row">
-	<nav class="navbar navbar-inverse">
-      <div class="container">
-        	<ul class="nav navbar-nav">
-        		<?php foreach($listCategories as $listCategorie): ?>
+	<nav class="navbar categories navbar-inverse">
+		<div class="container">
+	       	<ul class="nav navbar-nav">
+	       		<?php foreach($listCategories as $listCategorie): ?>
 				<li><a href="<?= $listCategorie->getUrl(); ?>"><?= $listCategorie->title; ?></a></li>
 				<?php endforeach; ?>
-        	</ul>
-      </div>
-    </nav>
+	       	</ul>
+	    </div>
+	</nav>	
+
 </div>
 	<div class="row">
 		<div class="col-sm-12">
@@ -22,9 +23,9 @@
 						<?php endif; ?>
 					</div>
 					<div class="col-sm-9">
-						<h2><a href="<?= $book->getUrl(); ?>"><?= $book->title; ?></a></h2>
-						<p><em><?= $book->category; ?></em></p>
-						<p><?= $book->getExtrait(500); ?></p>
+						<h1 class="title"><a href="<?= $book->getUrl(); ?>"><?= $book->title; ?></a></h1>
+						<p class="info"><em><?= $book->category; ?></em></p>
+						<div class="item"><?= $book->getExtrait(500); ?></div>
 					</div>	
 				</div>
 			<?php endforeach; ?>

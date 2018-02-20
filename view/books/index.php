@@ -12,10 +12,10 @@
 		</div>
 		
 		<div class="col-sm-9">
-			<h2><a href="<?= $book->getUrl(); ?>"><?= $book->title; ?></a></h2>
-			<p><em><?= $book->category; ?></em> | <em><?= $book->release_date; ?></em></p>
+			<h1 class="title"><a href="<?= $book->getUrl(); ?>"><?= $book->title; ?></a></h1>
+			<p class="info"><em><?= $book->category; ?></em> | <em><?= $book->getDate($dateFormat); ?></em></p>
 
-			<p><?= $book->content; ?></p>
+			<div class="item"><?= $book->content; ?></div>
 		</div>
 	</div>
 	<?php endforeach ?>

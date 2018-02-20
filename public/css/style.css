@@ -1,3 +1,5 @@
+/*------------- CSS général -----------------*/
+
 html, body {
     margin: 0;
     padding: 0;
@@ -10,20 +12,30 @@ body {
     color: #404852;
 }
 
-@media (min-width: 768px){
-    .auth.navbar-nav {
-        float: right;
-    }
-}
-
-
-header img {
-    width: 100%;
-    box-shadow: 2px 2px 5px #515c53;
+header {
+    margin-top: 50px;
 }
 
 h3 {
     font-size: 22px;
+}
+
+a {
+    color: #78ab4e;
+    transition: .3s;
+    transition-duration: .3s;
+}
+
+a:hover, a:focus {
+    color: #404852;
+    text-decoration: none;
+}
+
+/*------------- Header -----------------*/
+
+header img {
+    width: 100%;
+    box-shadow: 2px 2px 5px #515c53;
 }
 
 .intro {
@@ -33,23 +45,8 @@ h3 {
     color: #fff;
 }
 
-.container {
-    font-size: 14px;
-}
 
-.content {
-    padding: 2em 0;
-}
-
-.content-book {
-    padding-bottom: 15px;
-    margin-bottom: 10px;
-    border-bottom: .5px solid #e3e3e3;
-}
-
-.alert {
-    margin-top: 20px;
-}
+/*------------- Nav -----------------*/
 
 .navbar-inverse {
     background-color: #404852;
@@ -61,9 +58,172 @@ h3 {
     color: #a8b6ca;
 }
 
-.group-container {
-	margin-bottom: 1em;
+@media (min-width: 768px){
+    .auth.navbar-nav {
+        float: right;
+    }
 }
+
+nav.navbar.categories.navbar-inverse {
+    margin-top: 20px;
+    background-color: #e3e3e3;
+}
+
+.navbar-inverse .navbar-nav>li>a,
+.navbar-inverse .navbar-brand {
+    color: #78ab4e;
+}
+
+.burger {
+    display: none;
+}
+
+@media all and (max-width: 767px) {
+    
+    .burger {
+        display: block;
+        position: fixed;
+        background-color: #333;
+        margin-top: .8em;
+        right: 2.2em;
+        z-index: 3;
+        color: white;
+        padding: 0;
+        cursor: pointer;
+        border-bottom: 4px solid currentColor;
+        width: 28px;
+        transition: border-bottom 1s ease-in-out;
+        -webkit-transition: border-bottom 1s ease-in-out;
+    }
+    
+    .burger:before,
+    .burger:after {
+        content: "";
+        display: block;
+        border-bottom: 4px solid currentColor;
+        width: 100%;
+        margin-bottom: 5px;
+        transition: transform 0.5s ease-in-out;
+        -webkit-transition: -webkit-transform 0.5s ease-in-out;
+    }
+
+    .burger.open {
+        border-bottom: 4px solid transparent;
+        transition: border-bottom 0.8s ease-in-out;
+        -webkit-transition: border-bottom 0.8s ease-in-out;
+    }
+    .burger.open:before {
+        transform: rotate(-405deg) translateY(1px) translateX(-3px);
+        -webkit-transform: rotate(-405deg) translateY(1px) translateX(-3px);
+        transition: transform 0.5s ease-in-out;
+        -webkit-transition: -webkit-transform 0.5s ease-in-out;
+    }
+    .burger.open:after {
+        transform: rotate(405deg) translateY(-4px) translateX(-5px);
+        -webkit-transform: rotate(405deg) translateY(-4px) translateX(-5px);
+        transition: transform 0.5s ease-in-out;
+        -webkit-transition: -webkit-transform 0.5s ease-in-out;
+    }
+    .burger.open~#navbar {
+        display: block;
+        text-align: right;
+    }
+}
+
+
+/*------------- Container -----------------*/
+
+.alert {
+    margin-top: 20px;
+}
+
+.container {
+    font-size: 14px;
+}
+
+.content {
+    padding: 2em 0;
+}
+
+h1.title {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    border-bottom: .75px solid #e3e3e3;
+}
+
+.title a,
+.social a {
+    color: #404852;
+    transition: .3s;
+    transition-duration: .3s; 
+}
+
+.title a:focus, .title a:hover,
+.social a:focus, .social a:hover {
+    color: #78ab4e;
+    text-decoration: none;
+}
+
+.content-book {
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    border-bottom: .5px solid #e3e3e3;
+}
+
+.item {
+    text-align: justify;
+}
+
+.cover {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.principal {
+    border: 1px solid #ededed;
+    border-radius: 3px;
+    padding: 0 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 4px hsla(0,0%,95%,.56);
+}
+
+.table-cat {
+    margin: 0;
+}
+
+.table-cat>tbody>tr>td {
+    padding: 8px 0;
+    border-top: .75px solid #e3e3e3;
+}
+
+p.fil {
+    margin-top: 20px;
+}
+
+.group-container {
+    margin: 1.3em 0;
+}
+
+.list-group-item-comment {
+    background-color: #e3e3e3;
+}
+
+.list-group-item.list-group-item-comment.author,
+.list-group-item.command {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.author-name {
+    font-weight: 600;
+}
+
+/*------------- CSS Admin -----------------*/
+
+
 
 div#adminmenu {
     background-color: #404852;
@@ -126,14 +286,9 @@ ul#admin-menu {
     order: 1;
 }
 
-.cover {
-    width: 100%;
-    margin-top: 20px;
-}
-
 /*---------------- Account.php --------------------------#78ab4e*/ 
 .all_comment_title {
-    padding: 0 25px;
+    padding: 0 15px;
     color: #a8b6ca;
     font-size: 14px;
     font-weight: 700;
@@ -141,7 +296,6 @@ ul#admin-menu {
     border: 1px solid #404852;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    box-shadow: inset 0 1px 2px rgba(255,221,255,.75);
 }
 
 .all_comment_title h4 {
@@ -150,14 +304,16 @@ ul#admin-menu {
 }
 
 .all_comment_title h4 a {
-    color: #efbb6f;
-}
-
-.all_comment_title h4 a:hover {
-    text-decoration: none;
     color: #fff;
     transition: .3s;
     transition-duration: .3s;
+
+}
+
+.all_comment_title h4 a:hover,
+.all_comment_title h4 a:focus {
+    text-decoration: none;
+    color: #efbb6f;
 }
 
 .all_comment_content {
@@ -172,9 +328,63 @@ ul#admin-menu {
 }
 
 .all_comment_book, 
-.all_comment_date {
+.all_comment_date,
+.info {
     font-size: 12px;    
     font-weight: 400;
     color: #767676;
-
 }
+
+/*------------- Footer -----------------*/
+
+.footer {
+    position: relative;
+    margin-top: 50px;
+    padding: 25px 0;
+    font-size: .9em;
+    color: #404852;
+    background-color: #f9f9f9;
+    border-top: 3px solid #ececec;
+}
+
+.block {
+    border-right: .75px solid #e3e3e3;
+}
+
+.sign img {
+    width: 50%;
+}
+
+.bio {
+    font-size: .9em;
+    padding-top: 15px;
+}
+
+.social {
+    font-size: 2.5em;
+}
+
+.footer_title {
+    display: block;
+    font-weight: 700;
+    font-size: 1.3em;
+    color: #404852;
+    margin-bottom: 1em;
+}
+
+.footer_quote {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 1em;
+}
+
+.footer_quote:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #e0e0e0;
+    font-family: FontAwesome;
+    content: "\F10D";
+    font-size: 16px;
+}
+

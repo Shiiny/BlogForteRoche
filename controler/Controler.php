@@ -3,16 +3,18 @@
 namespace blog\controler;
 
 use \App;
+use \IntlDateFormatter;
 
 class Controler {
-
+	protected $dateFormat;
 	protected $viewPath;
 	protected $template = 'default';
 	protected $perPage = 5;
 
 
-	public function __construct() {
+	public function __construct($format = 'dd MMMM yyyy') {
 		$this->viewPath = ROOT . '/view/';
+		$this->dateFormat = new IntlDateFormatter('fr_FR', NULL, NULL, NULL, NULL, $format);
 	}
 
 	protected function render($view, $variables = []) {
@@ -21,12 +23,8 @@ class Controler {
 
 		require($this->viewPath . str_replace('.', '/', $view) . '.php');
 		$content = ob_get_clean();
-		if(strpos($view, 'books.home') === 0) {
-			require($this->viewPath . 'template/' . $this->template . '.php');
-		}
-		else {
-			require($this->viewPath . 'template/template.php');
-		}
+		
+		require($this->viewPath . 'template/' . $this->template . '.php');		
 	}
 
 	protected function loadModel($model_name) {

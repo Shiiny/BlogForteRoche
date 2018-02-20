@@ -20,15 +20,17 @@ class BooksControler extends Controler {
 		$book = $this->book->lastBook();
 		$chapters = $this->chapter->allChapters($book->id);
 		$photo = Image::getImage($book->img_name);
-
+		$dateFormat = $this->dateFormat;
+;
 		
-		$this->render('books.home', compact('book', 'photo', 'chapters'));
+		$this->render('books.home', compact('book', 'photo', 'chapters', 'dateFormat'));
 	}
 
 	public function index() {
 		$books = $this->book->allBooks();
+		$dateFormat = $this->dateFormat;
 
-		$this->render('books.index', compact('books'));
+		$this->render('books.index', compact('books', 'dateFormat'));
 	}
 
 	public function category() {
@@ -38,6 +40,7 @@ class BooksControler extends Controler {
 		}
 		$books = $this->book->byCategory($_GET['id']);
 		$listCategories = $this->category->all();
+
 		$this->render('books.category', compact('categorie', 'books', 'listCategories'));
 	}
 
@@ -50,7 +53,8 @@ class BooksControler extends Controler {
 		}
 
 		$photo = Image::getImage($book->img_name);
+		$dateFormat = $this->dateFormat;
 
-		$this->render('books.single', compact('chapters', 'book', 'photo', 'categories'));
+		$this->render('books.single', compact('chapters', 'book', 'photo', 'categories', 'dateFormat'));
 	}
 }

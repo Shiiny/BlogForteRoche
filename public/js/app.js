@@ -62,6 +62,16 @@ var App = {
 		    return (number/1048576).toFixed(1) + ' Mo';
 		  }
 		}
+	},
+
+	burgerMenu : function() {
+		$('.burger').on('click', function () {
+		    $(this).toggleClass('open');
+		});
+
+		$('.burger').on('touch', function () {
+		    $(this).toggleClass('open');
+		});
 	}
 
 }
@@ -70,4 +80,5 @@ App.addComment();
 App.closeComment();
 App.tagComment();
 App.previewInput();
+App.burgerMenu();
 
