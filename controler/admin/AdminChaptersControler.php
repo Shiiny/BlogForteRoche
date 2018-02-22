@@ -16,9 +16,19 @@ class AdminChaptersControler extends AdminControler {
 	}
 
 	public function index() {
-		$chapters = $this->chapter->all();
+		$nbPage = $this->pager('chapter', 'id', null, 10);
 
-		$this->render('admin.chapters.index', compact('chapters'));
+		if(isset($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] <= $nbPage) {
+			$currentPage = $_GET['page'];
+		}
+		else {
+			$currentPage = 1;
+		}
+
+		$chapters = $this->chapter->pagerAll($currentPage, $this->perPage);
+
+
+		$this->render('admin.chapters.index', compact('chapters', 'nbPage'));
 	}
 
 	public function add() {

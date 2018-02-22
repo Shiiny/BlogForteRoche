@@ -221,41 +221,63 @@ p.fil {
     font-weight: 600;
 }
 
-/*------------- CSS Admin -----------------*/
-
-
-
-div#adminmenu {
-    background-color: #404852;
-    border-color: #080808;
-    min-height: 100%;
+.paginate {
+    text-align: center;
+    margin-bottom: .9rem;
 }
 
-ul#admin-menu {
-    list-style: none;
-    padding-left: 0;
-}
-
-#admin-menu li {
-    padding-left: 1em;
-    border-bottom: 1px solid #a8b6ca;
-}
-
-#admin-menu li a {
-	text-decoration: none;
-	height: 66px;
-    line-height: 66px;
-    color: #a8b6ca;
-    font-weight: 700;
+.paginate a {
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    margin-right: 10px;
+    border: 1px solid #ededed;
+    background-color: #fff;
+    line-height: 33px;
+    color: inherit;
+    text-align: center;
+    border-radius: 3px;
     transition-duration: .3s;
 }
 
-#admin-menu li a:hover {
-    color: #ffffff;
+.paginate a.active, .paginate a:hover {
+    background-color: #3f4751;
+    border-color: #3f4751;
+    color: #fff;
+}
+
+/*------------- CSS Admin -----------------*/
+
+#adminmenu {
+    background-color: #404852;
+    border-color: #080808;
+    min-height: 500px;
+    padding: 0;
+}
+
+.sidebar-menu a {
+    display: block;
+    height: 66px;
+    border-top: 1px solid hsla(0,0%,100%,.05);
+    border-bottom: 1px solid #2b333c;
+    color: #939faf;
+    line-height: 66px;
+    padding: 0 15px;
+}
+
+.sidebar-menu a:hover {
+    background-color: #485361;
+    color: #fff;
 }
 
 #adminbody {
-    padding-top: 20px;
+    padding: 20px;
+}
+
+.item-title {
+    color: #fff;
+    background-image: linear-gradient(0deg,#404852 0,#788698);
+    border: 1px solid #404852;
 }
 
 .btn-success {
@@ -266,19 +288,53 @@ ul#admin-menu {
     transition-duration: .3s;
 }
 
-.btn-success:active, .btn-success:hover {
+.btn-success:active, .btn-success:hover, .btn-success:focus {
     background-color: transparent;
     border-color: #78ab4e;
     color: #78ab4e;
+}
+
+.btn-warning:active, .btn-warning:hover {
+    color: #d58512;
+    background-color: transparent;
+    border-color: #d58512;
+}
+
+.btn-danger:active, .btn-danger:hover{
+    color: #d43f3a;
+    background-color: transparent;
+    border-color: #d43f3a;
+}
+
+.btn-primary:active, .btn-primary:hover {
+    color: #286090;
+    background-color: transparent;
+    border-color: #286090;
+}
+
+.return {
+    margin-top: 20px;
 }
 
 .table {
     font-size: 14px;
 }
 
-.item-info {
-    vertical-align: middle;
-    color: #9e9e9e;
+thead {
+    font-weight: bold;
+}
+
+td.action,
+td.date {
+    width: 18%;
+}
+
+td.action_comment {
+    width: 13%;
+}
+
+tr>td a {
+    margin: 0 5px;
 }
 
 .preview img {
@@ -286,7 +342,23 @@ ul#admin-menu {
     order: 1;
 }
 
-/*---------------- Account.php --------------------------#78ab4e*/ 
+@media all and (max-width: 1025px) {
+    td.action {
+        width: 20%;
+    }
+}
+
+@media all and (max-width: 768px) {
+    td.date, td.date_item {
+        display: none;
+    }
+
+    td.action {
+        width: 29%;
+    }
+}
+
+/*---------------- Account.php --------------------------*/ 
 .all_comment_title {
     padding: 0 15px;
     color: #a8b6ca;
@@ -329,6 +401,7 @@ ul#admin-menu {
 
 .all_comment_book, 
 .all_comment_date,
+.date_item,
 .info {
     font-size: 12px;    
     font-weight: 400;
@@ -372,12 +445,6 @@ ul#admin-menu {
     margin-bottom: 1em;
 }
 
-.footer_quote {
-    position: relative;
-    padding-left: 30px;
-    margin-bottom: 1em;
-}
-
 .footer_quote:before {
     position: absolute;
     top: 0;
@@ -388,3 +455,50 @@ ul#admin-menu {
     font-size: 16px;
 }
 
+ul.contact {
+    padding: 0;
+    list-style: none;
+}
+
+/*------------- Error 404 -----------------*/
+
+#error {
+    padding: 150px 0; 
+    text-align: center;
+}
+
+.hgroup {
+    margin: 0 auto;
+}
+
+.hgroup h1,
+.hgroup h2 {
+    margin: 0 0 0 40px;
+    padding: 0;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.hgroup h1 {
+    margin-top: -90px;
+    font-size: 200px;
+}
+
+.hgroup h2 {
+    font-size: 60px;
+}
+
+.hgroup h2 span {
+    display: block;
+    font-size: 30px;
+}
+
+#error p {
+    margin: 25px 0 0 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+#error p:first-child {
+    margin-top: 0;
+}

@@ -11,8 +11,8 @@ class CommentEntity extends Entity {
 		return 'index.php?p=chapters.single&id=' . $id;
 	}
 
-	public function getExtrait() {
-		return '<p>' . substr($this->comment, 0, 300) . '...</p>';
+	public function getExtrait($length) {
+		return substr($this->comment, 0, $length);
 	}
 
 	public function getDate($datefmt) {

@@ -18,14 +18,6 @@ var App = {
 		});
 	},
 
-	tagComment : function() {
-		var tag = $('#tag');
-		console.log(tag);
-		if (tag> 0) {
-			tag.addClass('tag_comment');
-		}
-	},
-
 	previewInput : function() {
 		var input = document.querySelector('input[type=file]');
 		var preview = document.querySelector('.preview');
@@ -37,7 +29,6 @@ var App = {
 		function updateImageDisplay() {
 		  
 			var curFiles = input.files;
-			console.log(curFiles);
 			if(curFiles.length > 0) {
 				for(var i = 0; i < curFiles.length; i++) {
 					var listItem = document.createElement('li');
@@ -78,7 +69,5 @@ var App = {
 
 App.addComment();
 App.closeComment();
-App.tagComment();
 App.previewInput();
 App.burgerMenu();
-

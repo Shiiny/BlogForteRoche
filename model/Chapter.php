@@ -15,6 +15,14 @@ class Chapter extends Manager {
 		return $this->requete("SELECT chapters.id, chapter_title, chapter_content, DATE_FORMAT(chapter_release, '%d/%m/%Y %H:%i:%s') AS chapter_release, books.title FROM {$this->table} LEFT JOIN books ON chapters.book_id = books.id ORDER BY books.title DESC");
 	}
 
+	/**
+	 * Récupère tous les chapitres en liant le titre du livre avec pagination
+	 * @return array
+	 **/
+	public function pagerAll($currentPage, $perPage) {
+		return $this->requete("SELECT chapters.id, chapter_title, chapter_content, DATE_FORMAT(chapter_release, '%d/%m/%Y %H:%i:%s') AS chapter_release, books.title FROM {$this->table} LEFT JOIN books ON chapters.book_id = books.id ORDER BY books.title DESC LIMIT ".(($currentPage-1)*$perPage)." , $perPage");
+	}
+
 	/**	
 	*	Récupère les chapitres du book demandée.
 	*	@param int $book_id

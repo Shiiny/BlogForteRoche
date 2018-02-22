@@ -72,4 +72,8 @@ class User extends Manager {
 	public function allRoles() {
 		return $this->requete("SELECT slug, level FROM roles");
 	}
+
+	public function pagerUser($currentPage, $perPage) {
+		return $this->requete("SELECT users.id, users.username, users.role_id, users.password, users.email, users.confirmation_token, DATE_FORMAT(confirmed_at, '%d/%m/%Y %H:%i:%s') AS date_at, users.reset_token, users.reset_at, users.remember, roles.rang FROM {$this->table} LEFT JOIN roles ON users.role_id = roles.role_id WHERE confirmed_at IS NOT NULL LIMIT ".(($currentPage-1)*$perPage)." , $perPage");
+	}
 }

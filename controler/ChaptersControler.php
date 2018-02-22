@@ -8,7 +8,6 @@ use \App;
 
 class ChaptersControler extends Controler {
 
-
 	public function __construct() {
 		parent::__construct();
 		$this->loadModel('book');
@@ -29,10 +28,11 @@ class ChaptersControler extends Controler {
 		$listbooks = $this->book->allBooks();
 		$listChapters = $this->chapter->allChapters($chapter->book_id);
 
-		$nbPage = $this->pager('chapter_id', $chapter->id);
+		$nbPage = $this->pager('comment', 'chapter_id', $chapter->id);
+
 				
-		if(isset($_GET['commentPage']) && $_GET['commentPage'] > 0 && $_GET['commentPage'] <= $nbPage) {
-			$currentPage = $_GET['commentPage'];
+		if(isset($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] <= $nbPage) {
+			$currentPage = $_GET['page'];
 		}
 		else {
 			$currentPage = 1;

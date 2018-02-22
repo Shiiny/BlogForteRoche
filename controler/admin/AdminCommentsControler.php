@@ -17,9 +17,18 @@ class AdminCommentsControler extends AdminControler {
 	}
 
 	public function index() {
-		$comments = $this->comment->all();
+		$nbPage = $this->pager('comment', 'id');
 
-		$this->render('admin.comments.index', compact('comments'));
+		if(isset($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] <= $nbPage) {
+			$currentPage = $_GET['page'];
+		}
+		else {
+			$currentPage = 1;
+		}
+
+		$comments = $this->comment->pagerAll($currentPage, $this->perPage);
+
+		$this->render('admin.comments.index', compact('comments', 'nbPage'));
 	}
 
 	public function add() {

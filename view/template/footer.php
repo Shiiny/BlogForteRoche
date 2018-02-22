@@ -15,12 +15,12 @@
               <div class="footer_title">
                 Contact
               </div>
-              <ul>
+              <ul class="contact">
                 <li>
-                  <a href="/contact">Me contacter</a>
+                  <a href="#">Me contacter</a>
                 </li>
                 <li>
-                  <a href="/contact"><span class="icon icon-envelope-o"></span> Par email</a>
+                  <a href="mailto:contact@web-shiny.fr"><span class="icon icon-envelope-o"></span> Par email</a>
                 </li>
               </ul>
               <div class="social">

@@ -15,9 +15,20 @@ class AdminUsersControler extends AdminControler {
 	}
 
 	public function index() {
-		$users = $this->user->allUsers();
+		//$users = $this->user->allUsers();
 
-		$this->render('admin.users.index', compact('users'));
+		$nbPage = $this->pager('user', 'id', null, 10);
+
+		if(isset($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] <= $nbPage) {
+			$currentPage = $_GET['page'];
+		}
+		else {
+			$currentPage = 1;
+		}
+
+		$users = $this->user->pagerUser($currentPage, $this->perPage);		
+
+		$this->render('admin.users.index', compact('users', 'nbPage'));
 	}
 
 	public function rang() {

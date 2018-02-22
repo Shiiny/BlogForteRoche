@@ -72,8 +72,11 @@ class Manager {
 		return $this->requete("DELETE FROM {$this->table} WHERE id = ?", [$id], true);
 	}
 
-	public function count($field, $id) {
-		return $this->requete("SELECT COUNT($field) AS $field FROM {$this->table} WHERE $field = ?", [$id]);
+	public function count($field, $id = null) {
+		if($id) {
+			return $this->requete("SELECT COUNT($field) AS $field FROM {$this->table} WHERE $field = ?", [$id]);
+		}
+		return $this->requete("SELECT COUNT($field) AS $field FROM {$this->table}");
 	}
 
 	public function extract($key, $value) {

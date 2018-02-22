@@ -6,10 +6,10 @@ use \App;
 use \IntlDateFormatter;
 
 class Controler {
+	protected $perPage;
 	protected $dateFormat;
 	protected $viewPath;
 	protected $template = 'default';
-	protected $perPage = 5;
 
 
 	public function __construct($format = 'dd MMMM yyyy') {
@@ -31,22 +31,25 @@ class Controler {
 		$this->$model_name = App::getInstance()->getModelClass($model_name);
 	}
 
-	protected function notFound() {
+	protected function pager($model_name, $field, $id = null, $perPage = 5) {
+		$this->perPage = $perPage;
+
+		$data = $this->$model_name->count($field, $id);
+
+		$nbArt = (int) $data[0]->$field;
+		$nbPage = ceil($nbArt/$this->perPage);
+
+		return $nbPage;
+	}
+
+	public function notFound() {
 		header('HTTP/1.0 404 Not Found');
-		die('Page introuvable');;
+		header('Location: 404.php');
+		die();
 	}
 
 	protected function forbidden() {
 		header('HTTP/1.0 403 Forbiden');
 		die('Acces interdit');
-	}
-
-	protected function pager($field, $id) {
-		$data = $this->comment->count($field, $id);
-
-		$nbArt = (int) $data[0]->chapter_id;
-		$nbPage = ceil($nbArt/$this->perPage);
-
-		return $nbPage;
 	}
 }

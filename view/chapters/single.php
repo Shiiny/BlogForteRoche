@@ -38,10 +38,14 @@
 					<?php endif; ?>
 			</div>
 			<?php endforeach; ?>
-			<div class="pager">
+			<div class="paginate">
 			<?php if($nbPage > 1): ?>
 				<?php for($i = 1; $i <= $nbPage; $i++): ?>
-					<a href="index.php?p=chapters.single&id=<?= $chapter->id; ?>&commentPage=<?= $i; ?>"><?= $i; ?></a> /
+					<?php if(isset($_GET['page']) && $i == $_GET['page']): ?>
+						<a class="active" href="index.php?p=chapters.single&id=<?= $chapter->id; ?>&page=<?= $i; ?>"><?= $i; ?></a>
+					<?php else: ?>
+						<a href="index.php?p=chapters.single&id=<?= $chapter->id; ?>&page=<?= $i; ?>"><?= $i; ?></a>
+					<?php endif; ?>
 			<?php endfor; endif; ?>
 			</div>
 	</div>
