@@ -1,4 +1,10 @@
 <?php require('../view/admin/menu.php'); ?>
+	<?php if(isset($error)): ?>
+		<div class="alert alert-danger" role="alert">
+			<p><?= $error; ?></p>
+		</div>
+	<?php endif; ?>
+	
 	<div class="row">
 		<div class="col-sm-12">
 			<form method="post" action="">

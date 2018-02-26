@@ -22,9 +22,14 @@ class MysqlDatabase{
 
 	private function getPDO() {
 		if($this->pdo === null) {
-			$pdo = new PDO('mysql:dbname='.$this->db_name.';host='.$this->db_host.';charset=utf8', ''.$this->db_user.'', ''.$this->db_pass.'');
-			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$this->pdo = $pdo;
+			try {
+				$pdo = new PDO('mysql:dbname='.$this->db_name.';host='.$this->db_host.';charset=utf8', ''.$this->db_user.'', ''.$this->db_pass.'');
+				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$this->pdo = $pdo;
+			}
+			catch(Exception $e) {
+				die('Erreur : '.$e->getMessage());
+			}
 		}
 		return $this->pdo;
 	}

@@ -20,24 +20,6 @@ class AdminReportsControler extends AdminControler {
 		$this->render('admin.comments.report', compact('reports'));
 	}
 
-
-	public function edit() {
-		if(!empty($_POST)) {
-			$result = $this->comment->update($_GET['id'], [
-				'comment' => $_POST['comment'],
-				'chapter_id' => $_POST['chapter_id']
-			]);
-			if($result) {
-				return $this->index();
-			}
-		}
-		$comment = $this->comment->find($_GET['id']);
-
-		$chapters = $this->chapter->extract('id', 'chapter_title');
-		$form = new BootstrapForm($comment);
-		$this->render('admin.comments.add', compact('comment', 'chapters', 'form'));
-	}
-
 	public function valide() {
 		$report = $this->report->find($_POST['id']);
 		$comment = $this->comment->byReport($_POST['id']);

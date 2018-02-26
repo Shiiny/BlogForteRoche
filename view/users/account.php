@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<h1>Bienvenue <?= $_SESSION['auth']->username; ?></h1>
-		<p>Ceci est un utilisateur de type <strong><?= $_SESSION['auth']->rang; ?></strong></p>
+		<p>Voici les commentaires que vous avez posté :</p>
 	</div>
 </div>
 

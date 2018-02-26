@@ -15,8 +15,6 @@ class AdminUsersControler extends AdminControler {
 	}
 
 	public function index() {
-		//$users = $this->user->allUsers();
-
 		$nbPage = $this->pager('user', 'id', null, 10);
 
 		if(isset($_GET['page']) && $_GET['page'] > 0 && $_GET['page'] <= $nbPage) {

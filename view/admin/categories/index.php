@@ -16,7 +16,7 @@
 						</thead>
 						<tbody>
 							<?php foreach ($categories as $category): ?>
-								<tr>
+								<tr class="tr_categorie">
 									<td class="id_item"><?= $category->id; ?></td>
 									<td class="title_item"><?= $category->title; ?></td>
 									<td class="action_item">

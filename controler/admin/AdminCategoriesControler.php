@@ -20,26 +20,37 @@ class AdminCategoriesControler extends AdminControler {
 
 	public function add() {
 		if(!empty($_POST)) {
-			$result = $this->category->create(['title' => $_POST['title']]);
-			if($result) {
-				return $this->index();
+			if (!empty($_POST['title'])) {
+				$result = $this->category->create(['title' => $_POST['title']]);
+				if($result) {
+					return $this->index();
+				}	
+			}
+			else {
+				$error = "Vous n'avez pas précisé de nom de catégorie";
 			}
 		}
 		$form = new BootstrapForm($_POST);
-		$this->render('admin.categories.add', compact('form'));		
+		$this->render('admin.categories.add', compact('form', 'error'));		
 	}
 
 	public function edit() {
 		if(!empty($_POST)) {
-			$result = $this->category->update($_GET['id'], ['title' => $_POST['title']]);
-			if($result) {
-				return $this->index();
+			if(!empty($_POST['title'])) {
+				$result = $this->category->update($_GET['id'], ['title' => $_POST['title']]);
+				if($result) {
+					return $this->index();
+				}			
 			}
+			else {
+				$error = "Le titre de la catégorie ne peut être vide";
+			}
+
 		}
 		$category = $this->category->find($_GET['id']);
 
 		$form = new BootstrapForm($category);
-		$this->render('admin.categories.add', compact('form'));
+		$this->render('admin.categories.add', compact('form', 'error'));
 	}
 
 	public function delete() {

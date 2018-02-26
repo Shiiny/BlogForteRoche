@@ -52,29 +52,33 @@
 	
 	<div class="col-sm-3 col-sm-offset-1">
 		<div class="row">
-			<div class="principal">
-				<div class="title_chap">
-					<h3>Les chapitres :</h3>					
+			<div class="col-sm-12">
+				<div class="principal">
+					<div class="title_chap">
+						<h3>Les chapitres :</h3>					
+					</div>
+					<table class="table table-cat">
+						<?php foreach($listChapters as $listChapter): ?>
+						<tr>
+							<td><a href="<?= $listChapter->getUrl(); ?>"><?= $listChapter->chapter_title; ?></a></td>	
+						</tr>
+						<?php endforeach; ?>
+					</table>
 				</div>
-				<table class="table table-cat">
-					<?php foreach($listChapters as $listChapter): ?>
-					<tr>
-						<td><a href="<?= $listChapter->getUrl(); ?>"><?= $listChapter->chapter_title; ?></a></td>	
-					</tr>
-					<?php endforeach; ?>
-				</table>
 			</div>
-			<div class="principal">
-				<div class="title_book">
-					<h3>Les Oeuvres :</h3>
-				</div>
-				<table class="table table-cat">
-					<?php foreach($listbooks as $listbook): ?>
-					<tr>
-						<td><a href="<?= $listbook->getUrl(); ?>"><?= $listbook->title; ?></a></td>
-					</tr>
-				<?php endforeach; ?>
-				</table>
+			<div class="col-sm-12">
+				<div class="principal">
+					<div class="title_book">
+						<h3>Les Oeuvres :</h3>
+					</div>
+					<table class="table table-cat">
+						<?php foreach($listbooks as $listbook): ?>
+						<tr>
+							<td><a href="<?= $listbook->getUrl(); ?>"><?= $listbook->title; ?></a></td>
+						</tr>
+					<?php endforeach; ?>
+					</table>
+				</div>			
 			</div>
 		</div>
 	</div>

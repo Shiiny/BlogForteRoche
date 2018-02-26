@@ -33,37 +33,47 @@ class AdminChaptersControler extends AdminControler {
 
 	public function add() {
 		if(!empty($_POST)) {
-			$result = $this->chapter->create([
-				'chapter_author' => $_SESSION['auth']->username,
-				'chapter_title' => $_POST['chapter_title'],
-				'chapter_content' => $_POST['chapter_content'],
-				'book_id' => $_POST['book_id']
-			], 'chapter_release');
-			if($result) {
-				return $this->index();
+			if (!empty($_POST['chapter_title']) && !empty($_POST['chapter_content'])) {
+				$result = $this->chapter->create([
+					'chapter_author' => $_SESSION['auth']->username,
+					'chapter_title' => $_POST['chapter_title'],
+					'chapter_content' => $_POST['chapter_content'],
+					'book_id' => $_POST['book_id']
+				], 'chapter_release');
+				if($result) {
+					return $this->index();
+				}
+			}
+			else {
+				$error = "Vous n'avez pas rempli tous les champs";
 			}
 		}
 		$books = $this->book->extract('id', 'title');
 		$form = new BootstrapForm($_POST);
-		$this->render('admin.chapters.add', compact('books', 'form'));		
+		$this->render('admin.chapters.add', compact('books', 'form', 'error'));		
 	}
 
 	public function edit() {
 		if(!empty($_POST)) {
-			$result = $this->chapter->update($_GET['id'], [
-				'chapter_title' => $_POST['chapter_title'],
-				'chapter_content' => $_POST['chapter_content'],
-				'book_id' => $_POST['book_id']
-			], 'chapter_release');
-			if($result) {
-				return $this->index();
+			if (!empty($_POST['chapter_title'])) {
+				$result = $this->chapter->update($_GET['id'], [
+					'chapter_title' => $_POST['chapter_title'],
+					'chapter_content' => $_POST['chapter_content'],
+					'book_id' => $_POST['book_id']
+				], 'chapter_release');
+				if($result) {
+					return $this->index();
+				}
+			}
+			else {
+				$error = "La modification doit comporter au moins un titre";
 			}
 		}
 		$chapter = $this->chapter->find($_GET['id']);
 
 		$books = $this->book->extract('id', 'title');
 		$form = new BootstrapForm($chapter);
-		$this->render('admin.chapters.add', compact('books', 'chapter', 'form'));
+		$this->render('admin.chapters.add', compact('books', 'chapter', 'form', 'error'));
 	}
 
 	public function delete() {

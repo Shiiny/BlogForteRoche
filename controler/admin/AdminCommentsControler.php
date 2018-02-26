@@ -33,18 +33,23 @@ class AdminCommentsControler extends AdminControler {
 
 	public function add() {
 		if(!empty($_POST)) {
-			$result = $this->comment->create([
-				'author' => $_SESSION['auth']->username,
-				'comment' => $_POST['comment'],
-				'chapter_id' => $_POST['chapter_id']
-			], 'comment_date');
-			if($result) {
-				return $this->index();
+			if(!empty($_POST['comment']) && !empty($_POST['chapter_id'])) {
+				$result = $this->comment->create([
+					'author' => $_SESSION['auth']->username,
+					'comment' => $_POST['comment'],
+					'chapter_id' => $_POST['chapter_id']
+				], 'comment_date');
+				if($result) {
+					return $this->index();
+				}				
 			}
-		}
+			else {
+				$error = "Vous n'avez pas rempli tous les champs";
+			}
+		}	
 		$chapters = $this->chapter->extract('id', 'chapter_title');
 		$form = new BootstrapForm($_POST);
-		$this->render('admin.comments.add', compact('chapters', 'form'));		
+		$this->render('admin.comments.add', compact('chapters', 'form', 'error'));		
 	}
 
 	public function edit() {

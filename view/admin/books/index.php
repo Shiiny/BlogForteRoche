@@ -9,7 +9,7 @@
 
 				
 				<div class="list-group-item">
-					<table class="table table-striped">
+					<table class="table table-striped book">
 						<thead>
 							<tr>
 								<td class="id">ID</td>
@@ -20,12 +20,12 @@
 						</thead>
 						<tbody>
 							<?php foreach ($books as $book): ?>
-								<tr>
+								<tr class="item">
 									<td class="id_item"><?= $book->id; ?></td>
 									<td class="title_item"><?= $book->title; ?></td>
 									<td class="date_item"><?= $book->release_date; ?></td>
 									<td class="action_item">
-										<a href="<?= $book->getUrl(); ?>" class="btn-default"><i class="fas fa-eye" aria-hidden="true"></i></a>
+										<a href="<?= $book->getUrl(); ?>" class="btn-default preview"><i class="fas fa-eye" aria-hidden="true"></i></a>
 										<a href="?p=admin.books.edit&id=<?= $book->id; ?>" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i></a>
 										<form action="?p=admin.books.delete" method="post" style="display: inline;">
 											<input type="hidden" name="id" value="<?= $book->id; ?>">

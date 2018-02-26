@@ -18,7 +18,6 @@
 								<td class="author_item"><?= $report->author_report; ?></td>
 								<td class="date_item"><?= $report->report_release; ?></td>
 								<td class="action_item">
-									<a href="?p=admin.comments.edit&id=<?= $report->comment_id; ?>" class="btn btn-primary"><i class="fas fa-edit"></i></a>
 									<form action="?p=admin.reports.valide" method="post" style="display: inline;">
 										<input type="hidden" name="id" value="<?= $report->id; ?>">
 										<button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>

@@ -8,7 +8,7 @@
 						<thead>
 							<tr>
 								<td class="user_id">ID</td>
-								<td class="user_name">Username</td>
+								<td class="user_name">Nom</td>
 								<td class="user_rang">Rang</td>
 								<td class="user_email">E-mail</td>
 								<td class="user_date">Date d'inscription</td>
@@ -18,12 +18,12 @@
 						<tbody>
 							<?php foreach ($users as $user): ?>
 								<tr>
-									<td class="id_item"><?= $user->id; ?></td>
-									<td class="user_item"><?= $user->username; ?></td>
-									<td class="rang_item"><a class="btn btn-warning" href="?p=admin.users.rang&id=<?= $user->id; ?>"><?= $user->rang; ?></a>
-									<td class="email_item"><a href="mailto:<?= $user->email; ?>"><?= $user->email; ?></a></td>
-									<td class="date_item"><?= $user->date_at; ?></td>
-									<td class="action_item">
+									<td class="user_id_item"><?= $user->id; ?></td>
+									<td class="user_user_item"><?= $user->username; ?></td>
+									<td class="user_rang_item"><a class="btn btn-warning" href="?p=admin.users.rang&id=<?= $user->id; ?>"><?= $user->rang; ?></a>
+									<td class="user_email_item"><a href="mailto:<?= $user->email; ?>"><?= $user->email; ?></a></td>
+									<td class="user_date_item"><?= $user->date_at; ?></td>
+									<td class="user_action_item">
 										<form action="?p=admin.users.delete" method="post" style="display: inline;">
 											<input type="hidden" name="id" value="<?= $user->id; ?>">
 											<button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>

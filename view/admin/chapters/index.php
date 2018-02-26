@@ -24,7 +24,7 @@
 									<td class="book_item"><?= $chapter->title; ?></td>
 									<td class="date_item"><?= $chapter->chapter_release; ?></td>
 									<td class="action_item">
-										<a href="<?= $chapter->getUrl(); ?>" class="btn-default"><i class="fas fa-eye" aria-hidden="true"></i></a>
+										<a href="<?= $chapter->getUrl(); ?>" class="btn-default preview"><i class="fas fa-eye" aria-hidden="true"></i></a>
 										<a href="?p=admin.chapters.edit&id=<?= $chapter->id; ?>" class="btn btn-primary"><i class="fas fa-edit" aria-hidden="true"></i></a>
 										<form action="?p=admin.chapters.delete" method="post" style="display: inline;">
 											<input type="hidden" name="id" value="<?= $chapter->id; ?>">

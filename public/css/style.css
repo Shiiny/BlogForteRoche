@@ -45,6 +45,17 @@ header img {
     color: #fff;
 }
 
+@media (max-width: 1024px) {
+    .intro {
+        top: 35%;
+    }
+}
+
+@media (max-width: 768px) {
+    .intro {
+        display: none;
+    }
+}
 
 /*------------- Nav -----------------*/
 
@@ -184,7 +195,7 @@ h1.title {
 .principal {
     border: 1px solid #ededed;
     border-radius: 3px;
-    padding: 0 15px;
+    padding: 0 15px 15px 15px;
     margin-bottom: 25px;
     box-shadow: 0 4px 4px hsla(0,0%,95%,.56);
 }
@@ -196,6 +207,10 @@ h1.title {
 .table-cat>tbody>tr>td {
     padding: 8px 0;
     border-top: .75px solid #e3e3e3;
+}
+
+.table-cat>tbody>tr>td:hover {
+    background-color: #e3e3e3;
 }
 
 p.fil {
@@ -215,6 +230,10 @@ p.fil {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.edit {
+    margin-top: 20px;
 }
 
 .author-name {
@@ -288,6 +307,10 @@ p.fil {
     transition-duration: .3s;
 }
 
+.btn-primary {
+    margin: 5px;
+}
+
 .btn-success:active, .btn-success:hover, .btn-success:focus {
     background-color: transparent;
     border-color: #78ab4e;
@@ -342,9 +365,26 @@ tr>td a {
     order: 1;
 }
 
-@media all and (max-width: 1025px) {
-    td.action {
-        width: 20%;
+@media all and (max-width: 1200px) {
+    td.action, td.action_item {
+        width: auto;
+    }
+
+    td.action_item_comment {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+@media all and (max-width: 1024px) {
+    td.book, td.book_item {
+        width: 25%;
+    }
+
+    td.chapter, td.chapter_item, td.user_date, td.user_date_item {
+        display: none;
     }
 }
 
@@ -353,8 +393,33 @@ tr>td a {
         display: none;
     }
 
-    td.action {
-        width: 29%;
+    td.book, td.book_item {
+        width: auto;
+    }
+
+    td.action_item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+@media all and (max-width: 570px) {
+    td.user_email, td.user_email_item {
+        display: none;
+    }
+}
+
+@media all and (max-width: 450px) {
+    .table>tbody>tr>td, .table>thead>tr>td {
+        padding: 8px 1px; 
+    }
+}
+
+@media all and (max-width: 370px) {
+    td.id, td.id_item {
+        display: none;
     }
 }
 

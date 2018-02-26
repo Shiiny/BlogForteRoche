@@ -14,7 +14,7 @@
 								<td class="date">Dernière modification</td>
 								<td class="report">Report</td>
 								<td class="chapter">Chapitre associé</td>
-								<td class="action_comment">Actions</td>
+								<td class="action">Actions</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -33,7 +33,7 @@
 										<?php endif; ?>
 									</td>
 									<td class="chapter_item"><?= $comment->chapter_title; ?></td>
-									<td class="action_item">
+									<td class="action_item_comment">
 										<a href="?p=admin.comments.edit&id=<?= $comment->id; ?>" class="btn btn-primary"><i class="fas fa-edit"></i></a>
 										<form action="?p=admin.comments.delete" method="post" style="display: inline;">
 											<input type="hidden" name="id" value="<?= $comment->id; ?>">

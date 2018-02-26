@@ -64,28 +64,32 @@ class AdminBooksControler extends AdminControler {
 		$book = $this->book->find($_GET['id']);
 
 		if(!empty($_POST)) {
-
-			if($_FILES['img_name']['error'] === 0) {
-				$import = Image::addImage($_FILES['img_name']);
-				if($import == false) {
-					$error = "Votre fichier n'est pas une image";
+			if (!empty($_POST['title'])) {
+				if($_FILES['img_name']['error'] === 0) {
+					$import = Image::addImage($_FILES['img_name']);
+					if($import == false) {
+						$error = "Votre fichier n'est pas une image";
+					}
+					$result = $this->book->update($_GET['id'], [
+					'title' => $_POST['title'],
+					'content' => $_POST['content'],
+					'category_id' => $_POST['category_id'],
+					'img_name' => $import
+					], 'release_date');
 				}
-				$result = $this->book->update($_GET['id'], [
-				'title' => $_POST['title'],
-				'content' => $_POST['content'],
-				'category_id' => $_POST['category_id'],
-				'img_name' => $import
-				], 'release_date');
+				else {
+					$result = $this->book->update($_GET['id'], [
+					'title' => $_POST['title'],
+					'content' => $_POST['content'],
+					'category_id' => $_POST['category_id'],
+					], 'release_date');
+				}
+				if($result) {
+					return $this->index();
+				}						
 			}
 			else {
-				$result = $this->book->update($_GET['id'], [
-				'title' => $_POST['title'],
-				'content' => $_POST['content'],
-				'category_id' => $_POST['category_id'],
-				], 'release_date');
-			}
-			if($result) {
-				return $this->index();
+				$error = "La modification doit comporter au moins un titre";
 			}
 		}
 
