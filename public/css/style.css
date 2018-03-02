@@ -1,6 +1,7 @@
 /*------------- CSS général -----------------*/
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     border: 0;
@@ -22,19 +23,24 @@ h3 {
 
 a {
     color: #78ab4e;
+    -webkit-transition: .3s;
     transition: .3s;
+    -webkit-transition-duration: .3s;
     transition-duration: .3s;
 }
 
-a:hover, a:focus {
+a:hover,
+a:focus {
     color: #404852;
     text-decoration: none;
 }
+
 
 /*------------- Header -----------------*/
 
 header img {
     width: 100%;
+    -webkit-box-shadow: 2px 2px 5px #515c53;
     box-shadow: 2px 2px 5px #515c53;
 }
 
@@ -57,6 +63,7 @@ header img {
     }
 }
 
+
 /*------------- Nav -----------------*/
 
 .navbar-inverse {
@@ -69,7 +76,7 @@ header img {
     color: #a8b6ca;
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
     .auth.navbar-nav {
         float: right;
     }
@@ -90,7 +97,6 @@ nav.navbar.categories.navbar-inverse {
 }
 
 @media all and (max-width: 767px) {
-    
     .burger {
         display: block;
         position: fixed;
@@ -106,7 +112,6 @@ nav.navbar.categories.navbar-inverse {
         transition: border-bottom 1s ease-in-out;
         -webkit-transition: border-bottom 1s ease-in-out;
     }
-    
     .burger:before,
     .burger:after {
         content: "";
@@ -114,10 +119,11 @@ nav.navbar.categories.navbar-inverse {
         border-bottom: 4px solid currentColor;
         width: 100%;
         margin-bottom: 5px;
+        transition: -webkit-transform 0.5s ease-in-out;
         transition: transform 0.5s ease-in-out;
+        transition: transform 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
         -webkit-transition: -webkit-transform 0.5s ease-in-out;
     }
-
     .burger.open {
         border-bottom: 4px solid transparent;
         transition: border-bottom 0.8s ease-in-out;
@@ -126,13 +132,17 @@ nav.navbar.categories.navbar-inverse {
     .burger.open:before {
         transform: rotate(-405deg) translateY(1px) translateX(-3px);
         -webkit-transform: rotate(-405deg) translateY(1px) translateX(-3px);
+        transition: -webkit-transform 0.5s ease-in-out;
         transition: transform 0.5s ease-in-out;
+        transition: transform 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
         -webkit-transition: -webkit-transform 0.5s ease-in-out;
     }
     .burger.open:after {
         transform: rotate(405deg) translateY(-4px) translateX(-5px);
         -webkit-transform: rotate(405deg) translateY(-4px) translateX(-5px);
+        transition: -webkit-transform 0.5s ease-in-out;
         transition: transform 0.5s ease-in-out;
+        transition: transform 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
         -webkit-transition: -webkit-transform 0.5s ease-in-out;
     }
     .burger.open~#navbar {
@@ -167,12 +177,16 @@ h1.title {
 .title a,
 .social a {
     color: #404852;
+    -webkit-transition: .3s;
     transition: .3s;
-    transition-duration: .3s; 
+    -webkit-transition-duration: .3s;
+    transition-duration: .3s;
 }
 
-.title a:focus, .title a:hover,
-.social a:focus, .social a:hover {
+.title a:focus,
+.title a:hover,
+.social a:focus,
+.social a:hover {
     color: #78ab4e;
     text-decoration: none;
 }
@@ -197,7 +211,8 @@ h1.title {
     border-radius: 3px;
     padding: 0 15px 15px 15px;
     margin-bottom: 25px;
-    box-shadow: 0 4px 4px hsla(0,0%,95%,.56);
+    -webkit-box-shadow: 0 4px 4px hsla(0, 0%, 95%, .56);
+    box-shadow: 0 4px 4px hsla(0, 0%, 95%, .56);
 }
 
 .table-cat {
@@ -227,8 +242,14 @@ p.fil {
 
 .list-group-item.list-group-item-comment.author,
 .list-group-item.command {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
 }
 
@@ -256,14 +277,17 @@ p.fil {
     color: inherit;
     text-align: center;
     border-radius: 3px;
+    -webkit-transition-duration: .3s;
     transition-duration: .3s;
 }
 
-.paginate a.active, .paginate a:hover {
+.paginate a.active,
+.paginate a:hover {
     background-color: #3f4751;
     border-color: #3f4751;
     color: #fff;
 }
+
 
 /*------------- CSS Admin -----------------*/
 
@@ -277,7 +301,7 @@ p.fil {
 .sidebar-menu a {
     display: block;
     height: 66px;
-    border-top: 1px solid hsla(0,0%,100%,.05);
+    border-top: 1px solid hsla(0, 0%, 100%, .05);
     border-bottom: 1px solid #2b333c;
     color: #939faf;
     line-height: 66px;
@@ -295,7 +319,8 @@ p.fil {
 
 .item-title {
     color: #fff;
-    background-image: linear-gradient(0deg,#404852 0,#788698);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #404852), to(#788698));
+    background-image: linear-gradient(0deg, #404852 0, #788698);
     border: 1px solid #404852;
 }
 
@@ -303,7 +328,9 @@ p.fil {
     font-weight: 700;
     background-color: #78ab4e;
     border-color: transparent;
+    -webkit-transition: .3s;
     transition: .3s;
+    -webkit-transition-duration: .3s;
     transition-duration: .3s;
 }
 
@@ -311,25 +338,30 @@ p.fil {
     margin: 5px;
 }
 
-.btn-success:active, .btn-success:hover, .btn-success:focus {
+.btn-success:active,
+.btn-success:hover,
+.btn-success:focus {
     background-color: transparent;
     border-color: #78ab4e;
     color: #78ab4e;
 }
 
-.btn-warning:active, .btn-warning:hover {
+.btn-warning:active,
+.btn-warning:hover {
     color: #d58512;
     background-color: transparent;
     border-color: #d58512;
 }
 
-.btn-danger:active, .btn-danger:hover{
+.btn-danger:active,
+.btn-danger:hover {
     color: #d43f3a;
     background-color: transparent;
     border-color: #d43f3a;
 }
 
-.btn-primary:active, .btn-primary:hover {
+.btn-primary:active,
+.btn-primary:hover {
     color: #286090;
     background-color: transparent;
     border-color: #286090;
@@ -362,74 +394,99 @@ tr>td a {
 
 .preview img {
     height: 64px;
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
     order: 1;
 }
 
 @media all and (max-width: 1200px) {
-    td.action, td.action_item {
+    td.action,
+    td.action_item {
         width: auto;
     }
-
     td.action_item_comment {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
         justify-content: center;
+        -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     }
 }
 
 @media all and (max-width: 1024px) {
-    td.book, td.book_item {
+    td.book,
+    td.book_item {
         width: 25%;
     }
-
-    td.chapter, td.chapter_item, td.user_date, td.user_date_item {
+    td.chapter,
+    td.chapter_item,
+    td.user_date,
+    td.user_date_item {
         display: none;
     }
 }
 
 @media all and (max-width: 768px) {
-    td.date, td.date_item {
+    td.date,
+    td.date_item {
         display: none;
     }
-
-    td.book, td.book_item {
+    td.book,
+    td.book_item {
         width: auto;
     }
-
     td.action_item {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
         justify-content: center;
+        -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     }
 }
 
 @media all and (max-width: 570px) {
-    td.user_email, td.user_email_item {
+    td.user_email,
+    td.user_email_item {
         display: none;
     }
 }
 
 @media all and (max-width: 450px) {
-    .table>tbody>tr>td, .table>thead>tr>td {
-        padding: 8px 1px; 
+    .table>tbody>tr>td,
+    .table>thead>tr>td {
+        padding: 8px 1px;
     }
 }
 
 @media all and (max-width: 370px) {
-    td.id, td.id_item {
+    td.id,
+    td.id_item {
         display: none;
     }
 }
 
-/*---------------- Account.php --------------------------*/ 
+
+/*---------------- Account.php --------------------------*/
+
 .all_comment_title {
     padding: 0 15px;
     color: #a8b6ca;
     font-size: 14px;
     font-weight: 700;
-    background-image: linear-gradient(0deg,#404852 0,#788698);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #404852), to(#788698));
+    background-image: linear-gradient(0deg, #404852 0, #788698);
     border: 1px solid #404852;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -442,9 +499,10 @@ tr>td a {
 
 .all_comment_title h4 a {
     color: #fff;
+    -webkit-transition: .3s;
     transition: .3s;
+    -webkit-transition-duration: .3s;
     transition-duration: .3s;
-
 }
 
 .all_comment_title h4 a:hover,
@@ -464,14 +522,15 @@ tr>td a {
     padding: 15px;
 }
 
-.all_comment_book, 
+.all_comment_book,
 .all_comment_date,
 .date_item,
 .info {
-    font-size: 12px;    
+    font-size: 12px;
     font-weight: 400;
     color: #767676;
 }
+
 
 /*------------- Footer -----------------*/
 
@@ -525,10 +584,11 @@ ul.contact {
     list-style: none;
 }
 
+
 /*------------- Error 404 -----------------*/
 
 #error {
-    padding: 150px 0; 
+    padding: 150px 0;
     text-align: center;
 }
 

@@ -23,14 +23,13 @@ class AdminBooksControler extends AdminControler {
 		$this->render('admin.books.index', compact('books'));
 	}
 
-	public function add($app) {
+	public function add() {
 		$error;
 
 		if(!empty($_POST)) {
 			if (!empty($_POST['title']) && !empty($_POST['content'])) {
 				if(isset($_FILES)) {
 					$import = Image::addImage($_FILES['img_name']);
-					var_dump($import);
 					if($import == false) {
 						$error = "Votre fichier n'est pas une image";
 					}
